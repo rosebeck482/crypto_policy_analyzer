@@ -2,15 +2,6 @@
 
 A tool for analyzing and querying cryptocurrency regulation and policy documents using advanced NLP techniques including RAG (Retrieval Augmented Generation), semantic search, and graph-based retrieval.
 
-## Features
-
-- **Document Processing**: Extract and process policy documents from web links
-- **Semantic Chunking**: Split documents into meaningful chunks for better retrieval
-- **Vector Storage**: Store document embeddings in Elasticsearch
-- **Hybrid Search**: Combine semantic, BM25, and graph-based search techniques
-- **Structured Annotations**: Extract entities, concepts, and metadata from documents 
-- **Web Interface**: Query the knowledge base through a simple Flask web application
-
 ## Setup Instructions
 
 ### Prerequisites
