@@ -2,75 +2,197 @@
 
 A tool for analyzing and querying cryptocurrency regulation and policy documents using advanced NLP techniques including RAG (Retrieval Augmented Generation), semantic search, and graph-based retrieval.
 
+# Crypto Policy Documents Ingestion & Multi-Hop RAG System
 
-## Architecture Components
+This project is designed to ingest, process, chunk, annotate, and index cryptocurrency-related policy documents and then perform multi-hop reasoning over them using a Retrieval-Augmented Generation (RAG) approach. The system integrates modern LLM techniques with classical Information Retrieval methods.
 
-### Web Application (app.py)
-- **Framework**: Flask-based web application.
-- **Purpose**: Serves as the primary user interface and provides RESTful APIs for policy information queries.
-- **Key Features**:
-  - Endpoint `/api/query` to receive user queries and return relevant policy insights.
-  - Health check endpoint `/api/health` for system monitoring.
-  - Integration with the WebAnalyzer module to perform search and retrieval.
-  - Logging of incoming requests and outgoing responses to support auditability.
+---
 
-### Data Processing System (data_processor.py)
-- **Purpose**: Ingests, processes, and indexes policy documents.
-- **Key Capabilities**:
-  - **Document Loading**: Fetches content from URLs listed in a data_links file.
-  - **Document Conversion & Extraction**: Converts documents to Markdown for consistent text handling.
-  - **Markdown + Semantic Chunking**: First chunk documents with Markdowns then if the chunk is over 1500 chars, chunk again semantically.
-  - **Metadata Extraction**: Uses GPT-4 structured outputs to extract metadata - keywords and entities, summaries.
-  - **Vectorization & Indexing**:
-    - Integrates with OpenAI or a fallback SimpleEmbeddings model.
-    - Indexes content in Elasticsearch, preserving metadata for downstream retrieval.
-  - **Batch Processing & Parallelization**: Employs ThreadPoolExecutor for efficient handling of large document sets.
+## Overview
 
-### Web Analyzer (web_analyzer.py)
-- **Purpose**: Retrievs most relevant documents from the indexed data.
-- **Key Features**:
-  - **Hybrid Retrieval**:
-    - Semantic (vector) search for contextual matching.
-    - BM25 (keyword) search for exact term matching + Graph-based entity retrieval (using GraphRAG from Ragflow) to discover documents linked by named entities.
-  - **Result Ranking & Deduplication**: Scores and merges results from different retrieval methods to avoid redundancy.
-  - **Health Check**: Verifies connectivity and availability of embeddings, Elasticsearch, and GraphRAG subsystems.
+- **Purpose:**
+  - Ingest and convert policy documents (HTML/PDF) from URLs into Markdown.
+  - Split documents into meaningful chunks (using both markdown header splitting and semantic chunking).
+  - Optionally annotate chunks with structured metadata using the OpenAI Chat API.
+  - Index chunks in Elasticsearch using both embedding-based (vector) and BM25 (keyword) approaches.
+  - Retrieve and merge results from semantic, BM25, and (optionally) graph-based searches.
+  - Perform multi-hop reasoning (chain-of-thought) with DSPy for complex queries.
 
-## Data Pipeline
+---
 
-### Data Collection
-- Retrieves document URLs from a data_links configuration file.
-- Converts each document to a standardized Markdown format.
+## 1. Data Ingestion and Document Conversion
 
-### Text Processing
-- **Markdown-Aware Chunking**: Divides each document at logical Markdown headings.
-- **Semantic Chunking**: Further splits text based on semantic boundaries to ensure each chunk is contextually coherent.
+- **DataProcessor Class:**
+  - **Objective:** Automate the full lifecycle from document URL ingestion to Elasticsearch indexing.
+  - **Key Steps:**
+    - **Load Links:**
+      - Reads a file (e.g., `data_links`) to obtain document URLs.
+    - **Fetch and Convert:**
+      - Uses **Docling (DocumentConverter)** to fetch HTML/PDF and convert to Markdown.
+      - Method: `converter.url_to_markdown(url, timeout=URL_TIMEOUT)`.
+    - **Document Metadata Generation:**
+      - Creates a LangChain Document with metadata:
+        - `source URL`
+        - `domain` (derived from `urlparse`)
+        - `url_id` (hash or provided ID)
+        - `extraction_time`
+        - `title` (parsed from the first Markdown header or line)
+    - **Text Chunking:**
+      - **MarkdownHeaderTextSplitter:**
+        - Splits large Markdown documents based on headers (`#`, `##`, `###`, etc.).
+      - **SemanticChunker:**
+        - Further splits each chunk semantically using embeddings.
+      - **Fallback Mechanism:**
+        - If semantic chunking fails, it falls back to the raw split.
+    - **Annotation (Optional):**
+      - **Method:** `situate_and_annotate_chunk`
+      - **Mechanism:** Calls the OpenAI Chat API with a function schema to extract structured fields such as:
+        - Document type, summary, laws, organizations, etc.
+      - **Outcome:** Enriches each chunk’s metadata with the extracted details.
+    - **Persistence:**
+      - Optionally writes chunks with metadata to a local file (e.g., `latest_chunks_with_metadata.txt`) for debugging.
+    - **Indexing:**
+      - Prepared chunks are later indexed into Elasticsearch using the `build_vector_store` method.
 
-### Vectorization & Indexing
-- Extracts embeddings for each chunk using OpenAI or SimpleEmbeddings (fallback).
-- Stores chunk vectors and metadata in Elasticsearch.
-- Metadata includes document source, headings, and extracted entities.
+---
 
-### Batch Processing
-- Uses parallelism (via ThreadPoolExecutor) to optimize document ingestion.
-- Ensures resilient processing; errors are logged and fallback strategies are employed if services are unavailable.
+## 2. Indexing in Elasticsearch
 
-## Query System
+- **Vector Store Initialization:**
+  - **Tool:** `ElasticsearchStore` from `langchain_elasticsearch`.
+  - **Authentication:**
+    - Uses an API key if provided; otherwise, falls back to username/password.
+  - **Index Configuration:**
+    - Default index names: `policy-project` or `crypto-policy`.
+  - **Embeddings:**
+    - Uses `OpenAIEmbeddings` when an OpenAI API key is present.
+    - Falls back to a `SimpleEmbeddings` class generating deterministic random vectors if no key is provided.
+- **Batch Indexing:**
+  - Chunks are indexed in batches (batch size: 20) using:
+    - `vector_store.add_documents(batch)`
+  - Uses a `ThreadPoolExecutor` for parallelized indexing.
+- **BM25 Fields:**
+  - In addition to vector embeddings, raw text is stored in a field (e.g., `"text"`) analyzed with standard Lucene indexing.
+  - BM25 queries are executed using:
+    - `es_client.search(index=INDEX_NAME, body=search_body)`
 
-### Query Processing
-- Combines multiple retrieval strategies:
-  - Semantic (Vector) Search for contextual similarity.
-  - BM25 (Keyword) Search for lexical matching.
-  - Graph-Based Entity Search to leverage relationships among entities.
-- Applies a weighted ranking algorithm to merge results from different retrieval methods.
+---
 
-### Contextual Compression
-- Filters and refines retrieved chunks to discard irrelevant data.
-- Strives to maintain only the most pertinent information for the final answer.
+## 3. Retrieval and Hybrid RAG
 
-### Response Generation
-- Final stage uses an LLM to produce a coherent, user-friendly response.
-- Incorporates retrieved context and metadata to support accuracy.
-- Ensures answers cite sources, including metadata such as document URLs or headings.
+- **WebAnalyzer Class:**
+  - **Purpose:** Orchestrates different retrieval strategies.
+  - **Retrieval Methods:**
+    - **Semantic Retrieval:**
+      - Uses `self.vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": 15})` for embedding-based search.
+    - **BM25 Retrieval:**
+      - Constructs and executes BM25 queries over textual fields.
+      - Returns results as LangChain Document objects (content + metadata).
+    - **Graph-Based Retrieval (Optional):**
+      - If GraphRAG is installed:
+        - Extracts entities from the query using a custom prompt and LLM.
+        - Performs entity-based search in a knowledge graph to enhance retrieval.
+  - **Hybrid/Enhanced Retrieval:**
+    - **Hybrid Retrieval:**
+      - Combines semantic and BM25 search results.
+    - **Enhanced Retrieval:**
+      - Merges semantic, BM25, and graph-based search results.
+    - **Weighted Scoring Scheme:**
+      - Semantic weight: 0.6
+      - BM25 weight: 0.25
+      - Graph weight: 0.15
+    - **Process:**
+      - Deduplicates documents by content hash.
+      - Aggregates reciprocal rank scores from each retrieval method.
+      - Sorts documents by final weighted score and returns the top-k results.
+
+---
+
+## 4. Multi-Hop Chain-of-Thought with DSPy
+
+- **DSPy Signatures:**
+  - **GenerateSubQuery (dspy.Signature):**
+    - **Inputs:**
+      - `question`: The original complex query.
+      - `context`: The current retrieved context.
+    - **Output:**
+      - `sub_query`: A refined, more focused query.
+  - **SynthesizeAnswer (dspy.Signature):**
+    - **Inputs:**
+      - `question`: The original complex question.
+      - `sub_queries`: List of generated sub-questions.
+      - `contexts`: Retrieved contexts for each sub-query.
+    - **Output:**
+      - `answer`: The final consolidated answer.
+- **MultiHopChainOfThoughtRAG Class:**
+  - **LLM Integration:**
+    - Accepts an LLM instance (e.g., OpenAI Chat) and a `retriever_func` for fetching passages.
+  - **Process Workflow:**
+    - **Initialization:**
+      - Starts with the user’s original complex question.
+    - **Iterative Hops:**
+      - For each hop:
+        - Retrieves new passages using `retriever_func(current_query, k=self.passages_per_hop)`.
+        - Accumulates retrieved context.
+        - Generates a refined sub-query with `self.generate_sub_query(...)` (except on the final hop).
+    - **Final Synthesis:**
+      - Compiles all sub-queries and contexts using `self.synthesize_answer(...)` to produce the comprehensive answer.
+  - **Chain-of-Thought:**
+    - Each hop refines the query and builds upon the previous context, culminating in a multi-step reasoning process.
+
+---
+
+## 5. End-to-End Pipeline Summary
+
+- **Data Ingestion:**
+  - Load links → Convert to Markdown (using Docling) → Generate metadata → Split into chunks (Markdown and SemanticChunker) → Optional GPT-based annotation.
+- **Indexing:**
+  - Index chunks into Elasticsearch with:
+    - Vector embeddings for semantic search.
+    - BM25 searchable text for keyword-based IR.
+    - Enriched metadata (if annotated).
+- **Retrieval:**
+  - **WebAnalyzer:**
+    - Executes semantic retrieval, BM25 search, and optional graph-based search.
+    - Merges and scores results using a weighted reciprocal rank scheme.
+- **Multi-Hop Reasoning:**
+  - **MultiHopChainOfThoughtRAG:**
+    - Iteratively refines the query and synthesizes a final answer via DSPy’s chain-of-thought mechanism.
+
+---
+
+## 6. Machine Learning and Information Retrieval Techniques
+
+- **Embeddings:**
+  - Uses transformer-based embeddings (OpenAI’s `text-embedding-ada-002`) or fallback simple embeddings.
+- **BM25 Information Retrieval:**
+  - Implements classic BM25 scoring based on term frequency, inverse document frequency, and length normalization.
+- **Hybrid Weighted Scoring:**
+  - Merges results from semantic, BM25, and (optionally) graph-based retrieval using weighted reciprocal rank.
+- **GPT-Based Annotation:**
+  - Utilizes the OpenAI Chat API with function calling to extract structured metadata from document chunks.
+- **Chain-of-Thought Reasoning:**
+  - Uses DSPy to facilitate multi-hop reasoning by breaking down complex questions into sub-queries and synthesizing a final answer.
+
+---
+
+## 7. Tools and Technologies
+
+- **Docling:**
+  - Converts URLs (HTML/PDF) to Markdown.
+  - Integrated in `DataProcessor.process_url`.
+- **LangChain Components:**
+  - `MarkdownHeaderTextSplitter`: Splits documents by Markdown headers.
+  - `SemanticChunker`: Uses semantic embeddings to further divide text.
+  - `OpenAIEmbeddings`: Generates vector embeddings for indexing and similarity search.
+- **Elasticsearch & ElasticsearchStore:**
+  - Stores document chunks with both vector embeddings and BM25 searchable text.
+- **OpenAI Chat API:**
+  - Used for function calling to annotate chunks and as an LLM for query answering.
+- **DSPy:**
+  - Provides typed function signatures (`GenerateSubQuery` and `SynthesizeAnswer`) for orchestrating multi-hop reasoning.
+- **GraphRAG From Ragflow**
+  - Extends retrieval capabilities with entity extraction and graph-based search.
 
 
 ## Setup Instructions
