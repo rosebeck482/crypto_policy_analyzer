@@ -19,30 +19,21 @@ A tool for analyzing and querying cryptocurrency regulation and policy documents
 - **Key Capabilities**:
   - **Document Loading**: Fetches content from URLs listed in a data_links file.
   - **Document Conversion & Extraction**: Converts documents to Markdown for consistent text handling.
-  - **Semantic Chunking**: Splits documents into chunks based on semantic boundaries and Markdown headers.
-  - **Metadata Extraction**: Uses GPT-4 to extract structured metadata (e.g., legal/regulatory terms, policy references).
+  - **Markdown + Semantic Chunking**: First chunk documents with Markdowns then if the chunk is over 1500 chars, chunk again semantically.
+  - **Metadata Extraction**: Uses GPT-4 structured outputs to extract metadata - keywords and entities, summaries.
   - **Vectorization & Indexing**:
     - Integrates with OpenAI or a fallback SimpleEmbeddings model.
     - Indexes content in Elasticsearch, preserving metadata for downstream retrieval.
   - **Batch Processing & Parallelization**: Employs ThreadPoolExecutor for efficient handling of large document sets.
 
 ### Web Analyzer (web_analyzer.py)
-- **Purpose**: Provides core query functionality, retrieving the most relevant documents from the indexed data.
+- **Purpose**: Retrievs most relevant documents from the indexed data.
 - **Key Features**:
   - **Hybrid Retrieval**:
     - Semantic (vector) search for contextual matching.
-    - BM25 (keyword) search for exact term matching.
-    - Graph-based entity retrieval (GraphRAG) to discover documents linked by named entities.
+    - BM25 (keyword) search for exact term matching + Graph-based entity retrieval (using GraphRAG from Ragflow) to discover documents linked by named entities.
   - **Result Ranking & Deduplication**: Scores and merges results from different retrieval methods to avoid redundancy.
-  - **LLM Integration**: Uses large language models to generate contextually accurate responses.
   - **Health Check**: Verifies connectivity and availability of embeddings, Elasticsearch, and GraphRAG subsystems.
-
-### GraphRAG Components
-- **Purpose**: Enhances retrieval by modeling entity relationships within documents.
-- **Integration**: Incorporated as a custom module (graphrag_core).
-- **Features**:
-  - **Entity Extraction & Resolution**: Identifies named entities in queries (e.g., companies, regulatory agencies) and maps them to known entities in the knowledge graph.
-  - **Graph-Based Discovery**: Leverages entity links to surface relevant documents that might otherwise be missed by keyword or vector searches.
 
 ## Data Pipeline
 
