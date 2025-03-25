@@ -1,7 +1,5 @@
-"""
-Multi-hop Chain-of-Thought RAG implementation using DSPy.
+#Multi-hop Chain-of-Thought RAG implementation using DSPy.
 
-"""
 
 import logging
 from typing import List, Dict, Any, Callable, Optional, Union
@@ -32,31 +30,11 @@ class SynthesizeAnswer(dspy.Signature):
     answer: str = dspy.OutputField(desc="A comprehensive answer to the original question based on all contexts")
 
 class MultiHopChainOfThoughtRAG:
-    """
-    A DSPy-based implementation of multi-hop reasoning for complex policy analysis queries.
-    
-    This class implements a multi-hop chain-of-thought retrieval augmented generation (RAG) 
-    approach that:
-    1. Breaks down complex questions into simpler sub-queries
-    2. Retrieves relevant documents for each sub-query
-    3. Accumulates context from each retrieval step
-    4. Synthesizes a final answer based on all retrieved information
-    """
-    
     def __init__(self, 
                  llm: Any, 
                  retriever_func: Callable,
                  passages_per_hop: int = 3,
                  max_hops: int = 2):
-        """
-        Initialize the MultiHopChainOfThoughtRAG.
-        
-        Args:
-            llm: DSPy-compatible language model
-            retriever_func: Function that takes a query and k and returns a list of documents
-            passages_per_hop: Number of passages to retrieve for each hop
-            max_hops: Maximum number of hops (sub-queries) to generate
-        """
         self.llm = llm
         self.retriever_func = retriever_func
         self.passages_per_hop = passages_per_hop
@@ -69,15 +47,6 @@ class MultiHopChainOfThoughtRAG:
         logger.info(f"Initialized MultiHopChainOfThoughtRAG with max_hops={max_hops}, passages_per_hop={passages_per_hop}")
     
     def process(self, question: str) -> Dict[str, Any]:
-        """
-        Process a complex question using multi-hop reasoning.
-        
-        Args:
-            question: The complex policy analysis question to answer
-            
-        Returns:
-            A dictionary containing the original question, sub-queries, answer, and all contexts
-        """
         logger.info(f"Processing question with multi-hop RAG: {question}")
         
         # Initialize tracking variables
