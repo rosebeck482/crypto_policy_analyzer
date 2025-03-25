@@ -110,10 +110,3 @@ crypto_policy_analyzer/
 - `CHUNK_SIZE`: Target size of document chunks
 - `CHUNK_OVERLAP`: Overlap between chunks
 
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details. 
