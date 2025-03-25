@@ -82,7 +82,7 @@ A tool for analyzing and querying cryptocurrency regulation and policy documents
     - **BM25 Retrieval:**
       - Constructs and executes BM25 queries over textual fields.
       - Returns results as LangChain Document objects (content + metadata).
-    - **Graph-Based Retrieval (Optional):**
+    - **Graph-Based Retrieval:**
       - If GraphRAG is installed:
         - Extracts entities from the query using a custom prompt and LLM.
         - Performs entity-based search in a knowledge graph to enhance retrieval.
