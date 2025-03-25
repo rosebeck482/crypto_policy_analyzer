@@ -23,7 +23,6 @@ A tool for analyzing and querying cryptocurrency regulation and policy documents
       - Reads a file (e.g., `data_links`) to obtain document URLs.
     - **Fetch and Convert:**
       - Uses **Docling (DocumentConverter)** to fetch HTML/PDF and convert to Markdown.
-      - Method: `converter.url_to_markdown(url, timeout=URL_TIMEOUT)`.
     - **Document Metadata Generation:**
       - Creates a LangChain Document with metadata:
         - `source URL`
