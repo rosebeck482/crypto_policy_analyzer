@@ -2,12 +2,6 @@
 
 A tool for analyzing and querying cryptocurrency regulation and policy documents using advanced NLP techniques including RAG (Retrieval Augmented Generation), semantic search, and graph-based retrieval.
 
-# Crypto Policy Documents Ingestion & Multi-Hop RAG System
-
-This project is designed to ingest, process, chunk, annotate, and index cryptocurrency-related policy documents and then perform multi-hop reasoning over them using a Retrieval-Augmented Generation (RAG) approach. The system integrates modern LLM techniques with classical Information Retrieval methods.
-
----
-
 ## Overview
 
 - **Purpose:**
