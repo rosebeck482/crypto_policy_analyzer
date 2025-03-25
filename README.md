@@ -138,7 +138,7 @@ A tool for analyzing and querying cryptocurrency regulation and policy documents
 ## 5. End-to-End Pipeline Summary
 
 - **Data Ingestion:**
-  - Load links → Convert to Markdown (using Docling) → Generate metadata → Split into chunks (Markdown and SemanticChunker) → Optional GPT-based annotation.
+  - Load links → Convert to Markdown (using Docling) → Generate metadata → Split into chunks (Markdown and SemanticChunker) → GPT-based annotation.
 - **Indexing:**
   - Index chunks into Elasticsearch with:
     - Vector embeddings for semantic search.
@@ -146,7 +146,7 @@ A tool for analyzing and querying cryptocurrency regulation and policy documents
     - Enriched metadata (if annotated).
 - **Retrieval:**
   - **WebAnalyzer:**
-    - Executes semantic retrieval, BM25 search, and optional graph-based search.
+    - Executes semantic retrieval, BM25 search, and graph-based search.
     - Merges and scores results using a weighted reciprocal rank scheme.
 - **Multi-Hop Reasoning:**
   - **MultiHopChainOfThoughtRAG:**
