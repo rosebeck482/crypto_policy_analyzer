@@ -13,16 +13,14 @@ logger = logging.getLogger(__name__)
 
 # Define signatures for the multi-hop RAG components
 class GenerateSubQuery(dspy.Signature):
-    """Generate a sub-query based on the original question and current context."""
-    
+
     question: str = dspy.InputField(desc="The original complex question")
     context: str = dspy.InputField(desc="The current context and previously retrieved information")
     
     sub_query: str = dspy.OutputField(desc="A focused sub-query that helps answer part of the original question")
-    
-class SynthesizeAnswer(dspy.Signature):
-    """Synthesize a final answer from all retrieved information."""
-    
+
+# Synthesize a final answer from all retrieved information.
+class SynthesizeAnswer(dspy.Signature):    
     question: str = dspy.InputField(desc="The original complex question")
     sub_queries: List[str] = dspy.InputField(desc="The list of sub-queries that were asked")
     contexts: List[str] = dspy.InputField(desc="The list of contexts retrieved for each sub-query")
