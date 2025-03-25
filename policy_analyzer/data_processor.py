@@ -203,7 +203,8 @@ class DataProcessor:
             
             # Use DocumentConverter to fetch and convert the content
             converter = DocumentConverter()
-            content = converter.url_to_markdown(url, timeout=URL_TIMEOUT)
+            result = converter.convert(url)
+            content = result.document.export_to_markdown()
             
             if not content:
                 logger.error(f"Failed to extract content from {url}")
