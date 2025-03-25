@@ -155,7 +155,7 @@ A tool for analyzing and querying cryptocurrency regulation and policy documents
 
 ---
 
-## 6. Machine Learning and Information Retrieval Techniques
+## 6. Techniques
 
 - **Embeddings:**
   - Uses transformer-based embeddings (OpenAI’s `text-embedding-ada-002`) or fallback simple embeddings.
