@@ -2,6 +2,86 @@
 
 A tool for analyzing and querying cryptocurrency regulation and policy documents using advanced NLP techniques including RAG (Retrieval Augmented Generation), semantic search, and graph-based retrieval.
 
+
+## Architecture Components
+
+### Web Application (app.py)
+- **Framework**: Flask-based web application.
+- **Purpose**: Serves as the primary user interface and provides RESTful APIs for policy information queries.
+- **Key Features**:
+  - Endpoint `/api/query` to receive user queries and return relevant policy insights.
+  - Health check endpoint `/api/health` for system monitoring.
+  - Integration with the WebAnalyzer module to perform search and retrieval.
+  - Logging of incoming requests and outgoing responses to support auditability.
+
+### Data Processing System (data_processor.py)
+- **Purpose**: Ingests, processes, and indexes policy documents.
+- **Key Capabilities**:
+  - **Document Loading**: Fetches content from URLs listed in a data_links file.
+  - **Document Conversion & Extraction**: Converts documents to Markdown for consistent text handling.
+  - **Semantic Chunking**: Splits documents into chunks based on semantic boundaries and Markdown headers.
+  - **Metadata Extraction**: Uses GPT-4 to extract structured metadata (e.g., legal/regulatory terms, policy references).
+  - **Vectorization & Indexing**:
+    - Integrates with OpenAI or a fallback SimpleEmbeddings model.
+    - Indexes content in Elasticsearch, preserving metadata for downstream retrieval.
+  - **Batch Processing & Parallelization**: Employs ThreadPoolExecutor for efficient handling of large document sets.
+
+### Web Analyzer (web_analyzer.py)
+- **Purpose**: Provides core query functionality, retrieving the most relevant documents from the indexed data.
+- **Key Features**:
+  - **Hybrid Retrieval**:
+    - Semantic (vector) search for contextual matching.
+    - BM25 (keyword) search for exact term matching.
+    - Graph-based entity retrieval (GraphRAG) to discover documents linked by named entities.
+  - **Result Ranking & Deduplication**: Scores and merges results from different retrieval methods to avoid redundancy.
+  - **LLM Integration**: Uses large language models to generate contextually accurate responses.
+  - **Health Check**: Verifies connectivity and availability of embeddings, Elasticsearch, and GraphRAG subsystems.
+
+### GraphRAG Components
+- **Purpose**: Enhances retrieval by modeling entity relationships within documents.
+- **Integration**: Incorporated as a custom module (graphrag_core).
+- **Features**:
+  - **Entity Extraction & Resolution**: Identifies named entities in queries (e.g., companies, regulatory agencies) and maps them to known entities in the knowledge graph.
+  - **Graph-Based Discovery**: Leverages entity links to surface relevant documents that might otherwise be missed by keyword or vector searches.
+
+## Data Pipeline
+
+### Data Collection
+- Retrieves document URLs from a data_links configuration file.
+- Converts each document to a standardized Markdown format.
+
+### Text Processing
+- **Markdown-Aware Chunking**: Divides each document at logical Markdown headings.
+- **Semantic Chunking**: Further splits text based on semantic boundaries to ensure each chunk is contextually coherent.
+
+### Vectorization & Indexing
+- Extracts embeddings for each chunk using OpenAI or SimpleEmbeddings (fallback).
+- Stores chunk vectors and metadata in Elasticsearch.
+- Metadata includes document source, headings, and extracted entities.
+
+### Batch Processing
+- Uses parallelism (via ThreadPoolExecutor) to optimize document ingestion.
+- Ensures resilient processing; errors are logged and fallback strategies are employed if services are unavailable.
+
+## Query System
+
+### Query Processing
+- Combines multiple retrieval strategies:
+  - Semantic (Vector) Search for contextual similarity.
+  - BM25 (Keyword) Search for lexical matching.
+  - Graph-Based Entity Search to leverage relationships among entities.
+- Applies a weighted ranking algorithm to merge results from different retrieval methods.
+
+### Contextual Compression
+- Filters and refines retrieved chunks to discard irrelevant data.
+- Strives to maintain only the most pertinent information for the final answer.
+
+### Response Generation
+- Final stage uses an LLM to produce a coherent, user-friendly response.
+- Incorporates retrieved context and metadata to support accuracy.
+- Ensures answers cite sources, including metadata such as document URLs or headings.
+
+
 ## Setup Instructions
 
 ### Prerequisites
