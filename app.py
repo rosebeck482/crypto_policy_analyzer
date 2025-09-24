@@ -27,15 +27,16 @@ app = Flask(__name__,
 app.secret_key = os.environ.get("FLASK_SECRET_KEY", "default-secret-key")
 
 # Configure Elasticsearch
-ES_URL = os.environ.get("ES_URL", "https://my-elasticsearch-project-ad7bed.es.us-east-1.aws.elastic.cloud:443")
-ES_INDEX_NAME = os.environ.get("ES_INDEX_NAME", "crypto-policy")
+ES_URL = os.environ.get("ES_URL", "http://localhost:9200")
+ES_INDEX_NAME = os.environ.get("ES_INDEX_NAME", "policy-index")
 
-# Get or create the WebAnalyzer instance
+# Initialize WebAnalyzer once at startup
+logger.info("Initializing WebAnalyzer at startup")
+analyzer = WebAnalyzer()
+
+# Get the WebAnalyzer instance
 def get_analyzer():
-    if 'analyzer' not in g:
-        logger.info("Initializing WebAnalyzer")
-        g.analyzer = WebAnalyzer()
-    return g.analyzer
+    return analyzer
 
 # Log request information and set start time
 @app.before_request
@@ -58,7 +59,7 @@ def index():
 
 # API endpoint to query the vector store
 @app.route('/api/query', methods=['POST'])
-def query():
+def api_query():
     try:
         # Get JSON data from request
         data = request.json
@@ -85,6 +86,37 @@ def query():
         
     except Exception as e:
         logger.error(f"Error processing query: {str(e)}", exc_info=True)
+        return jsonify({"error": str(e)}), 500
+
+# Web interface query endpoint
+@app.route('/query', methods=['POST'])
+def query():
+    try:
+        # Get JSON data from request
+        data = request.json
+        if not data or 'query' not in data:
+            return jsonify({"error": "No query provided"}), 400
+            
+        query_text = data['query']
+        logger.info(f"Received web query: {query_text}")
+        
+        # Process the query
+        analyzer = get_analyzer()
+        start_time = time.time()
+        results = analyzer.process_query(query_text)
+        elapsed = time.time() - start_time
+        
+        # Add timing information to the response
+        results['timing'] = {
+            'total_seconds': elapsed,
+            'timestamp': datetime.now().isoformat()
+        }
+        
+        logger.info(f"Web query processed in {elapsed:.2f}s")
+        return jsonify(results)
+        
+    except Exception as e:
+        logger.error(f"Error processing web query: {str(e)}", exc_info=True)
         return jsonify({"error": str(e)}), 500
 
 # Health check endpoint

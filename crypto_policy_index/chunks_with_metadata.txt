@@ -1,0 +1,614 @@
+================================================================================
+CHUNK 1/20
+================================================================================
+
+CONTENT:
+# Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act  
+- Andrew Olmem,
+- Joseph A. Castelluccio,
+- Matthew Bisanz,
+- Kelly F. Truesdale,
+- Jeffrey P. Taft  
+Share  
+On March 13, 2025, the US Senate Banking Committee passed the Guiding  and Establishing National Innovation for US Stablecoins Act of 2025 or “GENIUS  Act,” out of committee by a vote of 18-6.  
+The legislation would establish for the first time a  comprehensive regulatory framework for the issuance and regulation of payment  stablecoins in the United States. Due to the strong bipartisan vote the bill  received in committee, the bill is well positioned to be approved by the full  Senate. Further, US House Financial Services Committee Chair French Hill (R-AR)  has already signaled his intention to move forward with a similar proposal, the STABLE  Act, and President Donald Trump has  indicated he wants to sign payment stablecoin legislation. Accordingly, payment  stablecoin legislation is poised to be enacted into law later this year.  
+In this Legal Update, we answer key questions about the GENIUS  Act.
+
+METADATA:
+  source: https://www.mayerbrown.com/en/insights/publications/2025/03/congress-moves-forward-on-stablecoin-legislation-the-us-senate-banking-committee-approves-the-genius-act
+  domain: www.mayerbrown.com
+  url_id: -1786843992518943288
+  extraction_time: 2025-09-21T02:44:16.663966
+  title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H1: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  chunk_index: 0
+  document_title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  document_type_purpose: Legal Update
+  summary: On March 13, 2025, the US Senate Banking Committee passed the GENIUS Act, which aims to establish a comprehensive regulatory framework for payment stablecoins in the US. The bill received strong bipartisan support and is expected to be approved by the full Senate. The House Financial Services Committee and President Trump have also shown support for similar legislation.
+  law_or_regulation: ['securities law']
+  legislation: ['GENIUS Act', 'STABLE Act']
+  organizations: ['US Senate Banking Committee', 'US House Financial Services Committee']
+  entities: ['US Senate', 'US House', 'President Donald Trump']
+  technology_terms: ['stablecoins']
+  dates_and_times: ['March 13, 2025']
+  context_and_implications: The passage of the GENIUS Act by the Senate Banking Committee marks a significant step towards regulating stablecoins in the US, with strong bipartisan support indicating a high likelihood of the bill becoming law. This legislation is part of a broader effort to provide a clear regulatory framework for digital assets, which could impact the financial and technological landscape significantly.
+
+
+================================================================================
+CHUNK 2/20
+================================================================================
+
+CONTENT:
+##### What is a Payment Stablecoin?  
+The GENIUS Act would define a payment stablecoin as a digital  asset that is or is designed to be used as a means of payment or settlement if:  (i) the issuer is obligated to convert, redeem, or repurchase for a fixed  amount of monetary value; (ii) it will maintain a stable value relative to the  value of a fixed amount of monetary value; and (iii) it is not a national  currency, bank deposit, interest-bearing instrument, or a security under  federal securities laws (other than by virtue of being a bond, note, evidence  of indebtedness, or investment contract).
+
+METADATA:
+  source: https://www.mayerbrown.com/en/insights/publications/2025/03/congress-moves-forward-on-stablecoin-legislation-the-us-senate-banking-committee-approves-the-genius-act
+  domain: www.mayerbrown.com
+  url_id: -1786843992518943288
+  extraction_time: 2025-09-21T02:44:16.663966
+  title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H1: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H5: What is a Payment Stablecoin?
+  chunk_index: 1
+  document_title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  document_type_purpose: Legal Update on Stablecoin Legislation
+  summary: The GENIUS Act defines a payment stablecoin as a digital asset used for payment or settlement, which must be redeemable for a fixed monetary value, maintain a stable value, and not be classified as a national currency, bank deposit, interest-bearing instrument, or security under federal securities laws.
+  law_or_regulation: ['federal securities laws']
+  legislation: ['GENIUS Act']
+  technology_terms: ['payment stablecoin']
+  context_and_implications: The definition provided by the GENIUS Act clarifies what constitutes a payment stablecoin, setting the stage for regulatory oversight and compliance requirements for such digital assets in the United States.
+
+
+================================================================================
+CHUNK 3/20
+================================================================================
+
+CONTENT:
+##### Who can Issue Payment Stablecoins?  
+To qualify as a permitted payment stablecoin issuers, a  person would have to incorporate in the US and then be either:  
+- A federal qualified nonbank payment stablecoin  issuer that have been approved by the Office of the Comptroller of the Currency  (OCC) pursuant to terms set forth in the Act.
+- A subsidiary of an insured depository  institution that has been approved by the depository institution’s primary  federal regulator (e.g., the Board of Governors of the Federal Reserve System  (“Federal Reserve”) for state member banks) pursuant to terms set forth in the  Act.
+- A state qualified payment stablecoin issuer that  have been approved by a state payment stablecoin regulator.
+
+METADATA:
+  source: https://www.mayerbrown.com/en/insights/publications/2025/03/congress-moves-forward-on-stablecoin-legislation-the-us-senate-banking-committee-approves-the-genius-act
+  domain: www.mayerbrown.com
+  url_id: -1786843992518943288
+  extraction_time: 2025-09-21T02:44:16.663966
+  title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H1: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H5: Who can Issue Payment Stablecoins?
+  chunk_index: 2
+  document_title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  document_type_purpose: Legal Update on Stablecoin Legislation
+  summary: The document outlines the qualifications required for entities to issue payment stablecoins under the GENIUS Act. Entities must be incorporated in the US and can qualify as federal qualified nonbank issuers, subsidiaries of insured depository institutions, or state qualified issuers approved by relevant regulators.
+  law_or_regulation: ['federal securities laws']
+  legislation: ['GENIUS Act']
+  organizations: ['Office of the Comptroller of the Currency', 'Federal Reserve']
+  entities: ['subsidiary of an insured depository institution']
+  technology_terms: ['payment stablecoins']
+  context_and_implications: The GENIUS Act sets a regulatory framework for stablecoin issuers, requiring them to be approved by federal or state regulators, which could impact the structure and operations of entities wishing to issue stablecoins in the US.
+  outcomes: Entities must meet specific regulatory requirements to issue stablecoins, potentially limiting the number of eligible issuers.
+
+
+================================================================================
+CHUNK 4/20
+================================================================================
+
+CONTENT:
+##### What are the Requirements for Becoming a Permitted  Payment Stablecoin Issuer?  
+The Act sets forth the terms by which federal banking  regulators can approve a person to become a permitted payment stablecoin  issuer. These include that the applicant demonstrates its financial  condition and appropriate resources, provides background information on officers,  directors and principal shareholders, and satisfies any other relevant safety  and soundness factors established by the federal banking regulators.  
+A federal regulator would have no more than 120 days to  issue a decision on an application and could deny an application if it  determined that the activities of the applicant would be unsafe or unsound  based on its ability to satisfy the prudential requirements discussed below.
+
+METADATA:
+  source: https://www.mayerbrown.com/en/insights/publications/2025/03/congress-moves-forward-on-stablecoin-legislation-the-us-senate-banking-committee-approves-the-genius-act
+  domain: www.mayerbrown.com
+  url_id: -1786843992518943288
+  extraction_time: 2025-09-21T02:44:16.663966
+  title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H1: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H5: What are the Requirements for Becoming a Permitted  Payment Stablecoin Issuer?
+  chunk_index: 3
+  document_title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  document_type_purpose: Legal Update on Stablecoin Legislation
+  summary: The GENIUS Act outlines the requirements for becoming a permitted payment stablecoin issuer, including demonstrating financial condition, providing background information on key personnel, and meeting safety and soundness factors. Federal regulators have 120 days to decide on applications and can deny them if the applicant's activities are deemed unsafe or unsound.
+  law_or_regulation: ['federal banking regulations']
+  legislation: ['GENIUS Act']
+  organizations: ['US Senate Banking Committee', 'Office of the Comptroller of the Currency']
+  technology_terms: ['stablecoins']
+  financial_concepts: ['payment stablecoin issuance']
+  context_and_implications: The GENIUS Act aims to establish a regulatory framework for stablecoin issuers, ensuring they meet specific financial and operational standards. This could lead to increased stability and trust in the stablecoin market.
+  outcomes: Federal regulators have a defined timeframe to approve or deny applications for stablecoin issuers, potentially increasing regulatory efficiency.
+
+
+================================================================================
+CHUNK 5/20
+================================================================================
+
+CONTENT:
+##### What are the Benefits of Becoming a Permitted Payment  Stablecoin Issuer?  
+The issuance of payment stablecoins in the US would be  restricted to the three types of permitted payment stablecoin issuers indicated  above. Although a payment stablecoin that is not issued by a permitted payment  stablecoin issuer still could be owned and sold in the US, the GENIUS Act would  prohibit it from being treated as cash or a cash equivalent for accounting,  securities margin, or derivatives purposes, or used as a settlement asset for  wholesale payments between banking organizations or by payment infrastructure  for settlement among banking organizations. These limitations will create strong  incentive for payment stablecoin issuers to become permitted payment stablecoin  issuers in the United States. However, even an unlicensed, non-US payment  stablecoin issuer must comply with a US court order or agency action. Such  orders and actions could direct the non-US issuer to seize, freeze, burn, or  prevent the transfer of a payment stablecoin.  
+Further, under the GENIUS Act, the Treasury Department may  determine that a non-US issuer (that is not a permitted payment stablecoin  issuer) of any payment stablecoins trading in the United States has failed to  comply with a court order or agency action. If the foreign issuer does not come  into compliance with the order or action, then the Secretary of the Treasury  may issue a notice prohibiting digital asset service providers from  facilitating secondary trading of the foreign issuer’s payment stablecoins in  the United States. This would effectively block the non-US issuer from having  US customers own or trade its payment stablecoins.
+
+METADATA:
+  source: https://www.mayerbrown.com/en/insights/publications/2025/03/congress-moves-forward-on-stablecoin-legislation-the-us-senate-banking-committee-approves-the-genius-act
+  domain: www.mayerbrown.com
+  url_id: -1786843992518943288
+  extraction_time: 2025-09-21T02:44:16.663966
+  title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H1: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H5: What are the Benefits of Becoming a Permitted Payment  Stablecoin Issuer?
+  chunk_index: 4
+  document_title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  document_type_purpose: Legal Update on Stablecoin Legislation
+  summary: The GENIUS Act restricts the issuance of payment stablecoins in the US to specific permitted issuers. Non-permitted issuers cannot treat their stablecoins as cash equivalents or use them for certain financial purposes. The Act also allows the Treasury to block non-compliant foreign issuers from US markets.
+  legislation: ['GENIUS Act']
+  organizations: ['US Senate Banking Committee', 'Treasury Department']
+  technology_terms: ['payment stablecoins']
+  financial_concepts: ['cash equivalent', 'securities margin', 'derivatives']
+  government_actions: ['court order', 'agency action']
+  context_and_implications: The GENIUS Act aims to regulate the issuance of payment stablecoins in the US, creating incentives for issuers to comply with the new framework. It also empowers the Treasury to enforce compliance among foreign issuers, potentially blocking them from the US market if they fail to adhere to regulations.
+
+
+================================================================================
+CHUNK 6/20
+================================================================================
+
+CONTENT:
+##### What are the Requirements for Issuing Payment  Stablecoins?  
+Payment stablecoin issuers would be required to comply with several  standards for the issuance of payment stablecoins. These include:  
+- Reserves. Issuers would be required to maintain reserves backing their payment stablecoins on at least a 1:1 basis. Acceptable reserves would include US coins and currency, deposits with Federal Reserve Banks, demand deposits at insured depository institutions, Treasury bills, notes, or bonds with a maturity of 93 days or less, certain repurchase agreements, reverse repurchase agreements, and money market funds. Reserves could be tokenized or held in their “natural” form.
+- However,  the GENIUS Act explicitly states that the requirement to maintain reserves does  not mean a payment stablecoin issuer would or would not be eligible for a  Master Account at a Federal Reserve Bank.
+- Public Reserves Disclosure. Monthly  disclosures of the composition of reserves, including the total number of  outstanding payment stablecoins and the amount and composition of the reserves,  would need to be published on the issuer’s website. A payment stablecoin  issuer’s public reserve disclosure would need to be examined on a monthly basis  by a registered public accounting firm, and the CEO and CFO of the issuer would  need to certify the accuracy of the disclosure to the relevant federal or state  regulator. Payment stablecoin issuers that have more than $50 billion in consolidated  total outstanding issuance and are not SEC reporting companies would be  required to obtain an annual audit of their financial statements (which must  cover related party transactions) and disclose that information on their  website and to their primary federal banking regulator.
+- Redemption Procedures and Disclosure. Issuers  would be required to establish procedures for timely redemption of outstanding  payment stablecoins and publicly disclose their redemption policy.  
+Payment stablecoin issuers generally would be prohibited  from pledging, rehypothecating, or reusing reserves, except for satisfying  related margin or custody services obligations or creating liquidity to meet  redemption requests. Issuers also would be prohibited from conditioning their  payment stablecoin services on a customer’s agreement to obtain another paid  service from the issuer (or its affiliates) or abstain from obtaining service  from a competitor.  
+Payment stablecoin issuers also would need to comply with  appropriate capital, liquidity, reserve asset diversification, and interest  rate risk management requirements, as well as appropriately tailored  operational, compliance, and information technology risk management standards.  The capital requirements would not be subject to the limitations of the  Dodd-Frank Act’s Collins Amendment, which prohibits regulators from setting  lower capital standards than were in effect for banks in 2010.
+
+METADATA:
+  source: https://www.mayerbrown.com/en/insights/publications/2025/03/congress-moves-forward-on-stablecoin-legislation-the-us-senate-banking-committee-approves-the-genius-act
+  domain: www.mayerbrown.com
+  url_id: -1786843992518943288
+  extraction_time: 2025-09-21T02:44:16.663966
+  title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H1: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H5: What are the Requirements for Issuing Payment  Stablecoins?
+  chunk_index: 5
+  document_title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  document_type_purpose: Legal Update on Stablecoin Legislation
+  summary: The GENIUS Act outlines requirements for payment stablecoin issuers, including maintaining a 1:1 reserve ratio with acceptable reserves, monthly public disclosure of reserve composition, and redemption procedures. Issuers are prohibited from certain practices like pledging reserves and must comply with capital and risk management standards.
+  law_or_regulation: ['Dodd-Frank Act']
+  legislation: ['GENIUS Act']
+  organizations: ['Federal Reserve', 'SEC']
+  technology_terms: ['stablecoins']
+  financial_concepts: ['reserves', 'redemption', 'capital requirements']
+  context_and_implications: The GENIUS Act sets comprehensive standards for stablecoin issuers, aiming to ensure financial stability and transparency in the issuance of payment stablecoins. It imposes strict reserve and disclosure requirements, potentially influencing the operational practices of stablecoin issuers.
+  outcomes: The Act establishes a regulatory framework that could lead to increased stability and trust in the stablecoin market, while also imposing significant compliance obligations on issuers.
+
+
+================================================================================
+CHUNK 7/20
+================================================================================
+
+CONTENT:
+##### How are Non-Stablecoin Activities Regulated  
+Similar to banks and bank holding companies, the  non-stablecoin-related businesses of a payment stablecoin issuer would be  restricted. Specifically, a payment stablecoin issuer would be permitted to  only: (i) issue and redeem payment stablecoins; (ii) manage reserves related to  the payment stablecoins; (iii) provide custodial and safekeeping services  related to payment stablecoins; and (iv) undertake other functions that  directly support the work of issuing and redeeming payment stablecoins.  However, a payment stablecoin issuer’s regulator could authorize it to engage  in other activities. The holding company of a payment stablecoin issuer and  “sister” affiliates would not be restricted with respect to their business  activities or relationships.
+
+METADATA:
+  source: https://www.mayerbrown.com/en/insights/publications/2025/03/congress-moves-forward-on-stablecoin-legislation-the-us-senate-banking-committee-approves-the-genius-act
+  domain: www.mayerbrown.com
+  url_id: -1786843992518943288
+  extraction_time: 2025-09-21T02:44:16.663966
+  title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H1: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H5: How are Non-Stablecoin Activities Regulated
+  chunk_index: 6
+  document_title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  document_type_purpose: Legal Update on Stablecoin Legislation
+  summary: The GENIUS Act restricts non-stablecoin-related activities of payment stablecoin issuers to issuing and redeeming stablecoins, managing reserves, providing custodial services, and other directly related functions. Regulators may authorize additional activities, but holding companies and affiliates of issuers are not restricted in their business activities.
+  law_or_regulation: ['stablecoin regulation']
+  legislation: ['GENIUS Act']
+  organizations: ['US Senate Banking Committee']
+  entities: ['payment stablecoin issuers']
+  technology_terms: ['payment stablecoins']
+  context_and_implications: The GENIUS Act aims to regulate the activities of payment stablecoin issuers, restricting them to core functions related to stablecoins, while allowing regulators to authorize additional activities. This regulation seeks to ensure that stablecoin issuers focus on their primary financial functions, while holding companies and affiliates have more freedom in their business operations.
+
+
+================================================================================
+CHUNK 8/20
+================================================================================
+
+CONTENT:
+##### Who Supervises Permitted Payment Stablecoins Issuers?  
+Federal qualified nonbank payment stablecoin issuers would  be regulated and supervised exclusively by the OCC, the current supervisor of  national banks. A federal qualified nonbank payment stablecoin issuer would be  required to submit quarterly financial condition and compliance reports and  undergo examination by the OCC. The OCC would have exclusive regulatory and  supervisory authority over a federal qualified nonbank payment stablecoin  issuer. This may indicate that state licensing requirements, such as money  transmitter and trust company laws, would be preempted for federal qualified  nonbank payment stablecoin issuers.  
+Payment stablecoin issuers that are subsidiaries of insured  depository institutions would be regulated and supervised by the federal  regulator of the insured depository institution (e.g., Federal Reserve, with  respect to subsidiaries of state member banks).  
+Payment stablecoin issuers with consolidated total  outstanding issuance of payment stablecoins of $10 billion or less (and which  are not a subsidiary of an insured depository institution) could opt to be  regulated and supervised under a state stablecoin framework, provided that the  state framework is substantially similar to the federal framework. This means  that states will need to update their regulatory frameworks as the GENIUS Act  is implemented to ensure they reflect the new federal requirements. Further, a  state regulator could enter into an agreement with the Federal Reserve to share  supervision of that state’s stablecoin issuers with the federal authority.  
+Payment stablecoin issuers with consolidated total  outstanding issuance in excess of $10 billion would be required to directly  comply with federal stablecoin regulations unless granted a waiver by a federal  banking regulator. State stablecoin issuers that are non-depository  institutions would become jointly regulated and supervised by their state regulator  and one of the federal banking regulators, but would not need to convert to a  federal charter. State stablecoin issuers that are depository institutions  would become jointly regulated and supervised by their state regulator and one  of the federal banking regulators.
+
+METADATA:
+  source: https://www.mayerbrown.com/en/insights/publications/2025/03/congress-moves-forward-on-stablecoin-legislation-the-us-senate-banking-committee-approves-the-genius-act
+  domain: www.mayerbrown.com
+  url_id: -1786843992518943288
+  extraction_time: 2025-09-21T02:44:16.663966
+  title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H1: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H5: Who Supervises Permitted Payment Stablecoins Issuers?
+  chunk_index: 7
+  document_title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  document_type_purpose: Legal Update on Stablecoin Legislation
+  summary: The GENIUS Act outlines the regulatory framework for payment stablecoin issuers, specifying that federal qualified nonbank issuers will be regulated by the OCC, while subsidiaries of insured depository institutions will be supervised by their respective federal regulators. Issuers with less than $10 billion in issuance may choose state regulation if it aligns with federal standards, while those with more than $10 billion must comply with federal regulations unless exempted.
+  law_or_regulation: ['Stablecoin regulation']
+  legislation: ['GENIUS Act']
+  organizations: ['OCC', 'Federal Reserve']
+  technology_terms: ['stablecoins']
+  context_and_implications: The GENIUS Act establishes a comprehensive regulatory framework for stablecoin issuers, potentially preempting state laws for federal issuers and requiring states to align their regulations with federal standards. This could centralize stablecoin regulation and oversight at the federal level, impacting how stablecoins are issued and supervised in the U.S.
+
+
+================================================================================
+CHUNK 9/20
+================================================================================
+
+CONTENT:
+##### Does the SEC or CFTC have Jurisdiction over Payment  Stablecoins?  
+No. The GENIUS Act would explicitly exclude payment  stablecoins from the federal regulatory regimes for securities, commodities,  and investment companies. Payment stablecoins would be excluded from the  definition of “security” under federal securities laws, the definition of  “commodity” in the Commodity Exchange Act, and the definition of an “investment  company” under the Investment Company Act.
+
+METADATA:
+  source: https://www.mayerbrown.com/en/insights/publications/2025/03/congress-moves-forward-on-stablecoin-legislation-the-us-senate-banking-committee-approves-the-genius-act
+  domain: www.mayerbrown.com
+  url_id: -1786843992518943288
+  extraction_time: 2025-09-21T02:44:16.663966
+  title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H1: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H5: Does the SEC or CFTC have Jurisdiction over Payment  Stablecoins?
+  chunk_index: 8
+  document_title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  document_type_purpose: Legal Update on Stablecoin Legislation
+  summary: The GENIUS Act explicitly excludes payment stablecoins from the federal regulatory regimes for securities, commodities, and investment companies. Payment stablecoins are not considered securities, commodities, or investment companies under federal laws.
+  law_or_regulation: ['federal securities laws', 'Commodity Exchange Act', 'Investment Company Act']
+  legislation: ['GENIUS Act']
+  organizations: ['SEC', 'CFTC']
+  technology_terms: ['payment stablecoins']
+  context_and_implications: The exclusion of payment stablecoins from the jurisdiction of the SEC and CFTC under the GENIUS Act clarifies the regulatory landscape for these digital assets, potentially easing their issuance and use in the financial system.
+
+
+================================================================================
+CHUNK 10/20
+================================================================================
+
+CONTENT:
+##### Do States have Jurisdiction over Payment Stablecoins?  
+Federal qualified nonbank payment stablecoin issuers would  not be subject to state supervision or regulation, which is similar to the  treatment of national banks under the National Bank Act. It appears that  approved subsidiaries of insured depository institutions would not be subject  to state supervision or regulation, although this is not clearly stated in the  Act.  
+For state qualified payment stablecoin issuers, the GENIUS  Act would require state regulators to establish criteria for determining  whether a state regulatory regime is substantially similar to the federal  regulatory framework for stablecoins. States would need to certify on an annual  basis to the federal Secretary of the Treasury that their regimes satisfy those  criteria. If a state fails to submit an annual certification or the Secretary  of the Treasury rejects a certification, then that state’s payment stablecoin  issuers would become subject to the federal regulatory framework for  stablecoins, regardless of market capitalization.  
+A payment stablecoin issuer regulated by a state generally  would be subject to the consumer protection laws of that state. Other states  could impose consumer protection requirements on an out-of-state  state-regulated payment stablecoin issuer only to the extent states may impose  such requirements on an out-of-state federal qualified nonbank payment  stablecoin issuer (i.e., only if the consumer protection requirement would not  be preempted by federal law). This preemption provision does not appear to  protect a state-regulated payment stablecoin issuer from other states’ money  transmitter licensing requirements.  
+State regulators (and federal regulators) would be able to  bring enforcement actions against their payment stablecoin issuers and  affiliated parties that are similar to the actions they may bring against  analogous insured depository institutions and their affiliated parties.
+
+METADATA:
+  source: https://www.mayerbrown.com/en/insights/publications/2025/03/congress-moves-forward-on-stablecoin-legislation-the-us-senate-banking-committee-approves-the-genius-act
+  domain: www.mayerbrown.com
+  url_id: -1786843992518943288
+  extraction_time: 2025-09-21T02:44:16.663966
+  title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H1: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H5: Do States have Jurisdiction over Payment Stablecoins?
+  chunk_index: 9
+  document_title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  document_type_purpose: Legal Update on Stablecoin Legislation
+  summary: The GENIUS Act outlines the jurisdictional boundaries for state and federal regulation of payment stablecoin issuers. Federal qualified nonbank payment stablecoin issuers are exempt from state supervision, similar to national banks. State qualified issuers must align with federal standards or face federal regulation. State regulators can enforce consumer protection laws and take action against issuers, akin to actions against insured depository institutions.
+  law_or_regulation: ['National Bank Act']
+  legislation: ['GENIUS Act']
+  organizations: ['US Senate Banking Committee', 'Secretary of the Treasury']
+  technology_terms: ['payment stablecoins']
+  context_and_implications: The GENIUS Act aims to create a cohesive regulatory framework for stablecoins, balancing federal and state oversight. It ensures that state regulations align with federal standards, potentially centralizing control and simplifying compliance for issuers. This could lead to a more uniform regulatory environment for stablecoins across the United States.
+  outcomes: State payment stablecoin issuers must comply with federal standards or be subject to federal regulation. State and federal regulators can enforce consumer protection laws and take action against issuers.
+
+
+================================================================================
+CHUNK 11/20
+================================================================================
+
+CONTENT:
+##### What are the AML Requirements for Permitted Stablecoin  Issuers?  
+Payment stablecoin issuers would be expressly classified as  financial institutions for purposes of the federal Bank Secrecy Act. This would  subject them to the full range of anti-money laundering (“AML”) compliance  obligations, including customer identification and due diligence, although  FinCEN would be required to implement compliance rules that are tailored to the  size and complexity of the issuer.  
+Further, the risk management standards established by  federal banking regulators would be required to include AML and sanctions  compliance. In particular, payment stablecoin issuers also would be required to  have the technological capacity to effectively block a digital asset of a  non-US person pursuant to a court order or agency action.
+
+METADATA:
+  source: https://www.mayerbrown.com/en/insights/publications/2025/03/congress-moves-forward-on-stablecoin-legislation-the-us-senate-banking-committee-approves-the-genius-act
+  domain: www.mayerbrown.com
+  url_id: -1786843992518943288
+  extraction_time: 2025-09-21T02:44:16.663966
+  title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H1: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H5: What are the AML Requirements for Permitted Stablecoin  Issuers?
+  chunk_index: 10
+  document_title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  document_type_purpose: Legal Update on Stablecoin Legislation
+  summary: The document discusses the anti-money laundering (AML) requirements for payment stablecoin issuers under the GENIUS Act. It specifies that these issuers will be classified as financial institutions under the federal Bank Secrecy Act, subjecting them to AML compliance obligations, including customer identification and due diligence. Additionally, they must have the technological capacity to block digital assets of non-US persons as per court orders or agency actions.
+  law_or_regulation: ['Bank Secrecy Act']
+  legislation: ['GENIUS Act']
+  organizations: ['FinCEN']
+  technology_terms: ['digital assets']
+  financial_concepts: ['anti-money laundering']
+  context_and_implications: The GENIUS Act imposes stringent AML requirements on stablecoin issuers, aligning them with traditional financial institutions in terms of compliance obligations. This reflects a significant regulatory step in integrating stablecoins into the existing financial system while ensuring they adhere to established AML standards.
+
+
+================================================================================
+CHUNK 12/20
+================================================================================
+
+CONTENT:
+##### What Happens if a Payment Stablecoin Issuer Fails?  
+The GENIUS Act would amend the Bankruptcy Code to permit a  payment stablecoin issuer that is not a depository institution to be a debtor.  This would allow a federal qualified nonbank payment stablecoin issuer,  subsidiary of an insured depository institution, or state qualified payment  stablecoin issuer that is not a bank or trust company to declare bankruptcy.  Stablecoin issuers that are depository institutions, such as banks or trust  companies, would be resolved either by the FDIC (for insured depository  institutions) or under state insolvency law (for uninsured state-chartered  depository institutions).  
+The GENIUS Act would amend and supersede existing insolvency  laws (e.g., Bankruptcy Code) by establishing that a person holding payment  stablecoins issued by an insolvent stablecoin issuer would have priority over  all other claims against the issuer. This would apply to both insolvencies  under federal insolvency laws and state insolvency laws, superseding any state  claims priority to the contrary.
+
+METADATA:
+  source: https://www.mayerbrown.com/en/insights/publications/2025/03/congress-moves-forward-on-stablecoin-legislation-the-us-senate-banking-committee-approves-the-genius-act
+  domain: www.mayerbrown.com
+  url_id: -1786843992518943288
+  extraction_time: 2025-09-21T02:44:16.663966
+  title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H1: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H5: What Happens if a Payment Stablecoin Issuer Fails?
+  chunk_index: 11
+  document_title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  document_type_purpose: Legal Update on the GENIUS Act related to stablecoin legislation.
+  summary: The GENIUS Act amends the Bankruptcy Code to allow payment stablecoin issuers that are not depository institutions to declare bankruptcy. It prioritizes claims of stablecoin holders over other claims in insolvency cases, superseding existing federal and state insolvency laws.
+  law_or_regulation: ['Bankruptcy Code']
+  legislation: ['GENIUS Act']
+  organizations: ['FDIC']
+  technology_terms: ['stablecoins']
+  context_and_implications: The amendment ensures that stablecoin holders have priority in insolvency cases, providing greater protection and clarity in the event of a stablecoin issuer's failure.
+  outcomes: Stablecoin holders will have priority over other claims in insolvency cases, ensuring their protection under the amended Bankruptcy Code.
+
+
+================================================================================
+CHUNK 13/20
+================================================================================
+
+CONTENT:
+##### What’s the Authority for Banks to Provide Services for  Payment Stablecoins?  
+The Act addresses the provision of banking services for  payment stablecoins in two ways.  
+First, a person would be able to offer custodial or safekeeping  services for permitted payment stablecoins or private keys of permitted  stablecoins only if (i) the person is supervised or regulated by a federal or  state banking regulator, and (ii) the person complies with segregation  requirements imposed under federal banking, securities, or derivatives law.  Such requirements generally could not include obligations to maintain  additional loss reserves or capital for such custodial and safekeeping services  (i.e., no reimposition of the Securities and Exchange Commission’s SAB 121).  
+Second and more broadly, the GENIUS Act would implicitly  recognize that a federal or state depository institution, credit union, or  trust company has the authority to engage in certain digital asset-related  activities, including:  
+- accepting or receiving deposits and issuing  digital assets that represent deposits;
+- utilizing a distributed ledger for the books and  records of the entity and to affect intrabank transfers; and
+- providing custodial services for payment stablecoins,  private keys of payment stablecoins, or reserves backing payment stablecoins.
+
+METADATA:
+  source: https://www.mayerbrown.com/en/insights/publications/2025/03/congress-moves-forward-on-stablecoin-legislation-the-us-senate-banking-committee-approves-the-genius-act
+  domain: www.mayerbrown.com
+  url_id: -1786843992518943288
+  extraction_time: 2025-09-21T02:44:16.663966
+  title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H1: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H5: What’s the Authority for Banks to Provide Services for  Payment Stablecoins?
+  chunk_index: 12
+  document_title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  document_type_purpose: Legal Update on Stablecoin Legislation
+  summary: The GENIUS Act provides authority for banks and financial institutions to offer custodial services for payment stablecoins, provided they are regulated by federal or state banking regulators and comply with segregation requirements. It also recognizes the authority of depository institutions to engage in digital asset-related activities, such as accepting deposits and using distributed ledgers for records.
+  law_or_regulation: ['federal banking law', 'securities law', 'derivatives law']
+  legislation: ['GENIUS Act']
+  organizations: ['Securities and Exchange Commission']
+  technology_terms: ['payment stablecoins', 'digital assets', 'distributed ledger']
+  financial_concepts: ['custodial services', 'safekeeping services', 'deposits']
+  context_and_implications: The GENIUS Act outlines the regulatory framework for banks to provide services related to payment stablecoins, ensuring they are supervised by appropriate regulators and adhere to specific legal requirements. This facilitates the integration of stablecoins into traditional banking services while maintaining regulatory oversight.
+  outcomes: Banks and financial institutions can offer custodial services for stablecoins, enhancing their role in the digital asset ecosystem.
+
+
+================================================================================
+CHUNK 14/20
+================================================================================
+
+CONTENT:
+##### When Would the Bill Become Effective?  
+If enacted, the GENIUS Act would take effect either 18  months after the date of enactment or 120 days after the date on which a  federal banking regulator issues final implementing regulations, whichever is  earlier.
+
+METADATA:
+  source: https://www.mayerbrown.com/en/insights/publications/2025/03/congress-moves-forward-on-stablecoin-legislation-the-us-senate-banking-committee-approves-the-genius-act
+  domain: www.mayerbrown.com
+  url_id: -1786843992518943288
+  extraction_time: 2025-09-21T02:44:16.663966
+  title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H1: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H5: When Would the Bill Become Effective?
+  chunk_index: 13
+  document_title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  document_type_purpose: Legal Update on Stablecoin Legislation
+  summary: The GENIUS Act, if enacted, would take effect either 18 months after its enactment date or 120 days after a federal banking regulator issues final implementing regulations, whichever comes first.
+  legislation: ['GENIUS Act']
+  context_and_implications: The timing of the GENIUS Act's effectiveness is contingent on either a set period post-enactment or the issuance of regulations, indicating a structured timeline for its implementation.
+
+
+================================================================================
+CHUNK 15/20
+================================================================================
+
+CONTENT:
+### Authors  
+- View Full Profile Partner Matthew Bisanz mbisanz @mayerbrown.com
+- <!-- image -->
+- Partner
+- Washington DC+1 202 263 3434
+- View Full Profile Partner Joseph A. Castelluccio jcastelluccio @mayerbrown.com
+- <!-- image -->
+- Partner
+- New York+1 212 506 2285
+- View Full Profile Partner Andrew Olmem aolmem @mayerbrown.com
+- <!-- image -->
+- Partner
+- Washington DC
+- View Full Profile Partner Jeffrey P. Taft jtaft @mayerbrown.com
+- <!-- image -->
+- Partner
+- Washington DC+1 202 263 3293
+- View Full Profile Associate Kelly F. Truesdale ktruesdale @mayerbrown.com
+- <!-- image -->
+- Associate
+- Washington DC+1 202 263 3294
+
+METADATA:
+  source: https://www.mayerbrown.com/en/insights/publications/2025/03/congress-moves-forward-on-stablecoin-legislation-the-us-senate-banking-committee-approves-the-genius-act
+  domain: www.mayerbrown.com
+  url_id: -1786843992518943288
+  extraction_time: 2025-09-21T02:44:16.663966
+  title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H1: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H3: Authors
+  chunk_index: 14
+  document_title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  document_type_purpose: Legal Update
+  summary: This section lists the authors of the document, including their contact information and locations. The authors are partners and associates at Mayer Brown, a global legal services provider.
+  entities: ['Mayer Brown']
+  locations: ['Washington DC', 'New York']
+  context_and_implications: The document provides contact information for the authors, indicating their roles and locations within Mayer Brown, a law firm involved in providing insights on the GENIUS Act.
+  outcomes: The document does not specify outcomes in this section, as it focuses on author information.
+
+
+================================================================================
+CHUNK 16/20
+================================================================================
+
+CONTENT:
+### Related Content  
+- PublicationsGENIUS Act Signed into Law US Enacts Federal Stablecoin LegislationJuly 18, 2025Learn More
+- PublicationsBreach Notification Requirement Finalized by US Banking RegulatorsNovember 23, 2021Learn More
+- PublicationsUS Financial Regulators Release Much-Anticipated Report on StablecoinsNovember 11, 2021Learn More
+
+METADATA:
+  source: https://www.mayerbrown.com/en/insights/publications/2025/03/congress-moves-forward-on-stablecoin-legislation-the-us-senate-banking-committee-approves-the-genius-act
+  domain: www.mayerbrown.com
+  url_id: -1786843992518943288
+  extraction_time: 2025-09-21T02:44:16.663966
+  title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H1: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H3: Related Content
+  chunk_index: 15
+  document_title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  document_type_purpose: Legal Update
+  summary: The related content section highlights the signing of the GENIUS Act into law on July 18, 2025, the finalization of breach notification requirements by US banking regulators on November 23, 2021, and a report on stablecoins released by US financial regulators on November 11, 2021.
+  dates_and_times: ['July 18, 2025', 'November 23, 2021', 'November 11, 2021']
+  context_and_implications: The related content provides context on the progression and implementation of the GENIUS Act, as well as other regulatory actions related to stablecoins and banking regulations in the US.
+
+
+================================================================================
+CHUNK 17/20
+================================================================================
+
+CONTENT:
+### Related Services &amp; Industries  
+#### Services  
+- Financial Services
+- Digital Assets, Blockchain &amp; Cryptocurrency
+- Banking &amp; Finance
+- Bank Regulatory
+
+METADATA:
+  source: https://www.mayerbrown.com/en/insights/publications/2025/03/congress-moves-forward-on-stablecoin-legislation-the-us-senate-banking-committee-approves-the-genius-act
+  domain: www.mayerbrown.com
+  url_id: -1786843992518943288
+  extraction_time: 2025-09-21T02:44:16.663966
+  title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H1: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H3: Related Services &amp; Industries
+  H4: Services
+  chunk_index: 16
+  document_title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  document_type_purpose: Legal Update on Stablecoin Legislation
+  summary: The document lists related services and industries connected to the GENIUS Act, focusing on financial services, digital assets, blockchain and cryptocurrency, banking and finance, and bank regulatory services.
+  technology_terms: ['blockchain', 'cryptocurrency']
+  context_and_implications: The GENIUS Act is connected to various financial and regulatory services, indicating its broad impact on the financial and digital asset sectors.
+
+
+================================================================================
+CHUNK 18/20
+================================================================================
+
+CONTENT:
+#### Industries  
+- Fintech  
+<!-- image -->
+
+METADATA:
+  source: https://www.mayerbrown.com/en/insights/publications/2025/03/congress-moves-forward-on-stablecoin-legislation-the-us-senate-banking-committee-approves-the-genius-act
+  domain: www.mayerbrown.com
+  url_id: -1786843992518943288
+  extraction_time: 2025-09-21T02:44:16.663966
+  title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H1: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H3: Related Services &amp; Industries
+  H4: Industries
+  chunk_index: 17
+  document_title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  document_type_purpose: Legal Update on Stablecoin Legislation
+  summary: The document mentions the fintech industry as related to the GENIUS Act, which is a legislative effort to regulate stablecoins in the United States.
+  technology_terms: ['stablecoins']
+  context_and_implications: The GENIUS Act is part of the legislative efforts to regulate the fintech industry, particularly focusing on stablecoins, which are digital assets designed to maintain a stable value. This regulation is significant for the fintech industry as it provides a framework for the issuance and regulation of stablecoins, impacting how fintech companies operate in this space.
+
+
+================================================================================
+CHUNK 19/20
+================================================================================
+
+CONTENT:
+### Stay Up To Date With Our Insights  
+See how we use a multidisciplinary, integrated approach to meet our clients' needs.
+
+METADATA:
+  source: https://www.mayerbrown.com/en/insights/publications/2025/03/congress-moves-forward-on-stablecoin-legislation-the-us-senate-banking-committee-approves-the-genius-act
+  domain: www.mayerbrown.com
+  url_id: -1786843992518943288
+  extraction_time: 2025-09-21T02:44:16.663966
+  title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H1: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H3: Stay Up To Date With Our Insights
+  chunk_index: 18
+  document_title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  document_type_purpose: Legal Update
+  summary: The document highlights the approval of the GENIUS Act by the US Senate Banking Committee, which aims to establish a comprehensive regulatory framework for payment stablecoins in the US. It outlines the requirements for becoming a permitted payment stablecoin issuer, the benefits, and the regulatory oversight involved. The document also discusses the exclusion of payment stablecoins from SEC and CFTC jurisdiction and the implications for state and federal regulation.
+  law_or_regulation: ['securities law', 'AML']
+  legislation: ['GENIUS Act', 'STABLE Act']
+  organizations: ['US Senate Banking Committee', 'US House Financial Services Committee', 'Office of the Comptroller of the Currency', 'Federal Reserve', 'Treasury Department', 'SEC', 'CFTC', 'FDIC']
+  entities: ['Mayer Brown']
+  technology_terms: ['payment stablecoins', 'digital asset', 'distributed ledger']
+  financial_concepts: ['reserves', 'redemption', 'capital', 'liquidity', 'custodial services']
+  government_actions: ['passed the GENIUS Act', 'signaled intention to move forward with the STABLE Act']
+  dates_and_times: ['March 13, 2025', 'July 18, 2025']
+  locations: ['United States']
+  context_and_implications: The GENIUS Act is poised to create a structured regulatory environment for payment stablecoins in the US, potentially influencing both domestic and international issuers. It aims to ensure financial stability and consumer protection while promoting innovation in the digital asset space.
+  outcomes: The GENIUS Act is expected to be enacted into law, providing a clear regulatory framework for stablecoin issuers and potentially leading to increased adoption and innovation in the stablecoin market.
+
+
+================================================================================
+CHUNK 20/20
+================================================================================
+
+CONTENT:
+### Follow us  
+- Subscribe
+- Legal Notices
+- Privacy Policy
+- Scam Warning
+- Contact
+- RSS  
+© 2025 Mayer Brown. All Rights Reserved  
+Mayer Brown is a global legal services provider comprising associated legal practices that are separate entities, including Mayer Brown LLP (Illinois, USA), Mayer Brown International LLP (England &amp; Wales), Mayer Brown Hong Kong LLP (a Hong Kong limited liability partnership) and Tauil &amp; Chequer Advogados (a Brazilian law partnership) (collectively, the “Mayer Brown Practices”). The Mayer Brown Practices are established in various jurisdictions and may be a legal person or a partnership. PK Wong &amp; Nair LLC (“PKWN”) is the constituent Singapore law practice of our licensed joint law venture in Singapore, Mayer Brown PK Wong &amp; Nair Pte. Ltd.  More information about the individual Mayer Brown Practices and PKWN can be found in the Legal Noticessection of our website.  
+“Mayer Brown” and the Mayer Brown logo are the trademarks of Mayer Brown.  
+Attorney Advertising. Prior results do not guarantee a similar outcome.
+
+METADATA:
+  source: https://www.mayerbrown.com/en/insights/publications/2025/03/congress-moves-forward-on-stablecoin-legislation-the-us-senate-banking-committee-approves-the-genius-act
+  domain: www.mayerbrown.com
+  url_id: -1786843992518943288
+  extraction_time: 2025-09-21T02:44:16.663966
+  title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H1: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  H3: Follow us
+  chunk_index: 19
+  document_title: Congress Moves Forward on Stablecoin Legislation: The US Senate Banking Committee Approves the GENIUS Act
+  document_type_purpose: Legal Update
+  summary: Mayer Brown is a global legal services provider with associated legal practices in various jurisdictions, including the USA, England & Wales, Hong Kong, and Brazil. The firm operates under the name Mayer Brown and is involved in attorney advertising.
+  entities: ['Mayer Brown', 'Mayer Brown LLP', 'Mayer Brown International LLP', 'Mayer Brown Hong Kong LLP', 'Tauil & Chequer Advogados', 'PK Wong & Nair LLC', 'Mayer Brown PK Wong & Nair Pte. Ltd.']
+  locations: ['Illinois', 'USA', 'England', 'Wales', 'Hong Kong', 'Brazil', 'Singapore']
+  context_and_implications: The document provides information about Mayer Brown's global presence and legal practices across multiple jurisdictions, emphasizing its role in attorney advertising and legal services.
+  outcomes: The document highlights Mayer Brown's legal services and global reach, indicating its capability to handle international legal matters.
+
+

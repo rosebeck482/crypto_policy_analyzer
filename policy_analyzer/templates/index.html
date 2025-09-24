@@ -15,12 +15,13 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
-            height: 500px;
+            height: calc(100vh - 200px);
+            min-height: 500px;
         }
         
         .chat-header {
             padding: 15px;
-            background-color: #1e88e5;
+            background-color: #000000;
             color: white;
             border-top-left-radius: 8px;
             border-top-right-radius: 8px;
@@ -46,7 +47,7 @@
         
         .user-message {
             align-self: flex-end;
-            background-color: #1e88e5;
+            background-color: #000000;
             color: white;
             border-bottom-right-radius: 5px;
         }
@@ -80,7 +81,7 @@
         }
         
         .chat-input button {
-            background-color: #1e88e5;
+            background-color: #000000;
             color: white;
             border: none;
             border-radius: 50%;
@@ -95,7 +96,7 @@
         }
         
         .chat-input button:hover {
-            background-color: #1976d2;
+            background-color: #333333;
         }
         
         .timestamp {
@@ -194,11 +195,11 @@
         }
         
         input:checked + .slider {
-            background-color: #1e88e5;
+            background-color: #000000;
         }
         
         input:focus + .slider {
-            box-shadow: 0 0 1px #1e88e5;
+            box-shadow: 0 0 1px #000000;
         }
         
         input:checked + .slider:before {
@@ -219,7 +220,7 @@
         }
         
         .tooltip {
-            color: #1e88e5;
+            color: #000000;
             cursor: help;
         }
     </style>
@@ -286,18 +287,7 @@
                     </div>
                 </div>
                 
-                <div class="settings-panel">
-                    <div class="advanced-mode-toggle">
-                        <label class="switch">
-                            <input type="checkbox" id="advancedModeToggle">
-                            <span class="slider round"></span>
-                        </label>
-                        <span class="toggle-label">Advanced Mode (Multi-hop reasoning)</span>
-                        <span class="tooltip" title="Enable multi-hop reasoning for complex questions. May take longer to process.">
-                            <i class="fas fa-question-circle"></i>
-                        </span>
-                    </div>
-                </div>
+                <!-- Advanced mode removed -->
                 
                 <form action="{{ url_for('query') }}" method="post" id="chat-form">
                     <div class="chat-input">
@@ -315,7 +305,7 @@
         </main>
 
         <footer>
-            <p>Cryptocurrency Policy Analyzer &copy; 2023</p>
+            <p>Cryptocurrency Policy Analyzer &copy; 2025</p>
         </footer>
     </div>
     
@@ -333,33 +323,31 @@
             this.style.height = (this.scrollHeight) + 'px';
         });
         
-        // Handle form submission with advanced mode toggle
-        document.getElementById('chat-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Show loading indicator
-            document.getElementById('loading').style.display = 'flex';
-            
-            // Disable the submit button
-            this.querySelector('button').disabled = true;
-            
-            // Get the question and advanced mode state
+            // Handle form submission
+            document.getElementById('chat-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Show loading indicator
+                document.getElementById('loading').style.display = 'flex';
+                
+                // Disable the submit button
+                this.querySelector('button').disabled = true;
+                
+            // Get the question
             const question = document.getElementById('question').value;
-            const advancedMode = document.getElementById('advancedModeToggle').checked;
-            
-            // Send the data to the server using fetch API
-            fetch("{{ url_for('query') }}", {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    query: question,
-                    advanced_mode: advancedMode
+                
+                // Send the data to the server using fetch API
+                fetch("{{ url_for('query') }}", {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                    query: question
+                    })
                 })
-            })
-            .then(response => response.json())
-            .then(data => {
+                .then(response => response.json())
+                .then(data => {
                 // Create user message
                 const userMessage = document.createElement('div');
                 userMessage.className = 'message user-message';
@@ -382,38 +370,22 @@
                     // Format the answer
                     botMessage.innerHTML = data.answer;
                     
-                    // If advanced mode was used, show the reasoning path
-                    if (advancedMode && data.sub_queries && data.sub_queries.length > 0) {
-                        const reasoningPath = document.createElement('details');
-                        reasoningPath.innerHTML = '<summary>View reasoning path</summary>';
-                        
-                        const queryList = document.createElement('ul');
-                        queryList.style.margin = '10px 0';
-                        queryList.style.paddingLeft = '20px';
-                        
-                        data.sub_queries.forEach(sq => {
-                            const item = document.createElement('li');
-                            item.innerHTML = `<strong>Step ${sq.hop + 1}:</strong> ${sq.query}`;
-                            queryList.appendChild(item);
-                        });
-                        
-                        reasoningPath.appendChild(queryList);
-                        botMessage.appendChild(reasoningPath);
-                    }
+                    // Advanced mode removed
                     
-                    // Add sources if available
-                    if (data.sources && data.sources.length > 0) {
-                        const sourceDetails = document.createElement('details');
-                        sourceDetails.innerHTML = `<summary>View sources (${data.source_count})</summary>`;
-                        
-                        const sourcesList = document.createElement('ul');
+                        // Add sources if available
+                        if (data.sources && data.sources.length > 0) {
+                            const sourceDetails = document.createElement('details');
+                            sourceDetails.innerHTML = `<summary>View sources (${data.source_count})</summary>`;
+                            
+                            const sourcesList = document.createElement('ul');
                         sourcesList.style.margin = '10px 0';
                         sourcesList.style.paddingLeft = '20px';
                         
                         data.sources.forEach((source, i) => {
                             const item = document.createElement('li');
-                            const linkText = source.metadata.title || `Source ${i+1}`;
-                            item.innerHTML = `<a href="${source.url || '#'}" target="_blank">${linkText}</a>: ${source.content}`;
+                            const linkText = (source.metadata && source.metadata.title) ? source.metadata.title : `Source ${i+1}`;
+                            const href = (source.metadata && source.metadata.source) ? source.metadata.source : '#';
+                            item.innerHTML = `<a href="${href}" target="_blank">${linkText}</a>: ${source.content}`;
                             sourcesList.appendChild(item);
                         });
                         

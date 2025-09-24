@@ -1,0 +1,5 @@
+Elasticsearch index: policy-index
+Chunks count: 20
+Built at: 2025-09-21T02:46:38.731855
+URL: http://localhost:9200
+Chunking method: markdown_header_split

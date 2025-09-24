@@ -25,16 +25,19 @@ import json
 import time
 
 # Import our custom document chunker
-from document_chunker import process_url_to_chunks, fetch_document_content
+from .document_chunker import process_url_to_chunks, fetch_document_content
 # Import our semantic metadata module
-import semantic_metadata
+from . import semantic_metadata
 
 # Constants
-ES_URL = ""
-ES_USER = ""  
-ES_PASSWORD = ""  
-ES_API_KEY = ""  
-INDEX_NAME = ""
+from dotenv import load_dotenv
+load_dotenv()
+
+ES_URL = os.environ.get("ES_URL", "http://localhost:9200")
+ES_USER = os.environ.get("ES_USER", "elastic")  
+ES_PASSWORD = os.environ.get("ES_PASSWORD", "")  
+ES_API_KEY = os.environ.get("ES_API_KEY", "")  
+INDEX_NAME = os.environ.get("ES_INDEX_NAME", "policy-index")
 URL_TIMEOUT = 30  # seconds
 CHUNK_SIZE = 1000
 CHUNK_OVERLAP = 200
@@ -345,7 +348,7 @@ class DataProcessor:
                 f.write(f"Chunks count: {len(self.chunks)}\n")
                 f.write(f"Built at: {datetime.now().isoformat()}\n")
                 f.write(f"URL: {ES_URL}\n")
-                f.write(f"Chunking method: semantic\n")
+                f.write(f"Chunking method: markdown_header_split\n")
             
             logger.info(f"Saved index reference to {self.persistence_dir}")
             return es_store

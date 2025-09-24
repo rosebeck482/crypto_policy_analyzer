@@ -22,6 +22,8 @@ URL_TIMEOUT = 30  # seconds
 #Convert a URL to Markdown format using a DocumentConverter.
 def url_to_markdown(converter, url, timeout=30):
     try:
+        # Docling does not expose timeout directly; ensure upstream HTTP client is configured.
+        # Here we call convert and rely on external network timeouts.
         result = converter.convert(url)
         return result.document.export_to_markdown()
     except Exception as e:

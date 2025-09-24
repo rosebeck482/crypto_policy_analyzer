@@ -6,6 +6,7 @@ import logging
 import sys
 import time
 from typing import List, Dict, Any, Optional, Tuple
+import hashlib
 
 from dotenv import load_dotenv
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
@@ -22,17 +23,7 @@ from elasticsearch import Elasticsearch
 logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 logger = logging.getLogger()
 
-# Import GraphRAG components
-try:
-    from .graphrag_core.search import GraphSearch
-    from .graphrag_core.utils import extract_entities
-    from .graphrag_core import entity_resolution
-    from .query_analyze_prompt import PROMPTS
-    GRAPHRAG_AVAILABLE = True
-    logger.info("GraphRAG components available")
-except ImportError:
-    GRAPHRAG_AVAILABLE = False
-    logger.warning("GraphRAG components not available. Using standard hybrid retrieval only.")
+# GraphRAG and DSPy functionality removed for stability and simplicity
 
 # Load environment variables
 load_dotenv()
@@ -46,13 +37,11 @@ ES_USER = os.environ.get("ES_USER", "elastic")
 ES_PASSWORD = os.environ.get("ES_PASSWORD", "")
 ES_INDEX_NAME = os.environ.get("ES_INDEX_NAME", "policy-index")
 
-# Log API key availability (safely)
+# Log API key availability (safely). If missing, we will fall back to a non-LLM mode.
 if openai_api_key:
     logger.info(f"OPENAI_API_KEY found with length: {len(openai_api_key)}")
-    # No logging of any part of the key for security
 else:
-    logger.error("OPENAI_API_KEY not found in environment variables")
-    raise ValueError("OpenAI API key not found in environment variables")
+    logger.warning("OPENAI_API_KEY not found; LLM features will be disabled, using SimpleEmbeddings.")
 
 # Reload dotenv to ensure we have the latest values
 logger.info("Reloading environment variables to ensure latest values...")
@@ -75,11 +64,30 @@ class WebAnalyzer:
         self.bm25_weight = bm25_weight
         self.graph_weight = graph_weight
         
-        # Initialize OpenAI embeddings
-        self.embeddings = OpenAIEmbeddings(
-            model="text-embedding-ada-002",  # Using the older model to match the index
-            openai_api_key=openai_api_key
-        )
+        # Initialize embeddings: OpenAI if available, otherwise local SimpleEmbeddings
+        if openai_api_key:
+            self.embeddings = OpenAIEmbeddings(
+                model="text-embedding-3-small",
+                openai_api_key=openai_api_key
+            )
+        else:
+            from langchain.embeddings.base import Embeddings
+            import numpy as np
+
+            class SimpleEmbeddings(Embeddings):
+                def __init__(self, vector_size: int = 1536):
+                    self.vector_size = vector_size
+                def _vec(self, text: str):
+                    np.random.seed(hash(text) % (2**32))
+                    v = np.random.normal(0, 1, self.vector_size)
+                    v = v / np.linalg.norm(v)
+                    return v.tolist()
+                def embed_documents(self, texts):
+                    return [self._vec(t) for t in texts]
+                def embed_query(self, text):
+                    return self._vec(text)
+
+            self.embeddings = SimpleEmbeddings()
         
         # Connect to Elasticsearch
         logger.info(f"Connecting to Elasticsearch index: {ES_INDEX_NAME}")
@@ -100,7 +108,7 @@ class WebAnalyzer:
                 self.es_client = Elasticsearch(
                     ES_URL,
                     api_key=es_api_key,
-                    verify_certs=False  # Consider setting to True in production with proper cert verification
+                    verify_certs=True
                 )
             else:
                 logger.info("Using username/password authentication for Elasticsearch")
@@ -117,7 +125,7 @@ class WebAnalyzer:
                 self.es_client = Elasticsearch(
                     ES_URL,
                     basic_auth=(ES_USER, ES_PASSWORD),
-                    verify_certs=False  # Consider setting to True in production with proper cert verification
+                    verify_certs=True
                 )
                 
             logger.info(f"Successfully connected to Elasticsearch index: {ES_INDEX_NAME}")
@@ -140,35 +148,17 @@ class WebAnalyzer:
                 base_compressor=embeddings_filter
             )
             
-            # Initialize the LLM
-            self.llm = ChatOpenAI(
-                model="gpt-4o",
-                temperature=0,
-                openai_api_key=openai_api_key
-            )
-            
-            # Initialize Graph Search if available
-            if GRAPHRAG_AVAILABLE:
+            # Initialize the LLM only if API key available; otherwise, use non-LLM fallback
+            self.llm = None
+            if openai_api_key:
                 try:
-                    # Get the custom prompt for entity extraction
-                    custom_prompt = PROMPTS.get("Refactored_minirag_query2kwd")
-                    if custom_prompt:
-                        logger.info("Using custom Refactored_minirag_query2kwd prompt for GraphRAG")
-                    else:
-                        logger.warning("Custom prompt not found, using default GraphRAG prompt")
-                    
-                    self.graph_search = GraphSearch(
-                        vector_store=self.vectorstore,
-                        embeddings=self.embeddings,
-                        llm=self.llm
+                    self.llm = ChatOpenAI(
+                        model="gpt-4o",
+                        temperature=0,
+                        openai_api_key=openai_api_key
                     )
-                    logger.info("Successfully initialized GraphRAG search")
                 except Exception as e:
-                    logger.error(f"Error initializing GraphRAG: {str(e)}")
-                    self.graph_search = None
-            else:
-                self.graph_search = None
-                logger.warning("GraphRAG not available, using standard hybrid retrieval only")
+                    logger.warning(f"Failed to initialize ChatOpenAI; non-LLM fallback will be used. Error: {e}")
             
         except Exception as e:
             logger.error(f"Error connecting to Elasticsearch: {str(e)}")
@@ -203,7 +193,7 @@ class WebAnalyzer:
         }
         
         try:
-            response = self.es_client.search(index=ES_INDEX_NAME, body=search_body)
+            response = self.es_client.search(index=ES_INDEX_NAME, query=search_body["query"], size=k)
             
             # Convert Elasticsearch hits to Document objects
             documents = []
@@ -237,134 +227,7 @@ class WebAnalyzer:
         else:
             return doc.page_content
     
-    def graph_based_search(self, query: str, k: int = 15) -> List[Document]:
-        """
-        Perform a graph-based search using the GraphRAG components.
-        
-        Args:
-            query: The search query
-            k: Number of results to return
-            
-        Returns:
-            List of Documents
-        """
-        if not GRAPHRAG_AVAILABLE or not self.graph_search:
-            logger.warning("GraphRAG not available. Returning empty result.")
-            return []
-        
-        try:
-            # Extract entities using the custom prompt
-            custom_prompt = PROMPTS.get("Refactored_minirag_query2kwd")
-            entities = extract_entities(
-                query=query, 
-                llm=self.llm,
-                custom_prompt=custom_prompt
-            )
-            
-            if not entities:
-                logger.info("No entities found in query for graph search.")
-                return []
-            
-            logger.info(f"Extracted entities for graph search: {entities}")
-            
-            # Perform graph search
-            results = self.graph_search.search(
-                query=query,
-                entities=entities,
-                k=k
-            )
-            
-            logger.info(f"Retrieved {len(results)} documents from graph search")
-            return results
-            
-        except Exception as e:
-            logger.error(f"Error in graph search: {str(e)}")
-            return []
-    
-    def enhanced_hybrid_retrieval(self, query: str, k: int = 4) -> List[Document]:
-        """
-        Perform enhanced hybrid retrieval using semantic + BM25 + graph search.
-        
-        Args:
-            query: The search query
-            k: Number of final documents to retrieve
-            
-        Returns:
-            List of retrieved and ranked documents
-        """
-        # Get semantic search results
-        candidate_k = min(50, k * 5)  # Get more candidates for scoring
-        
-        try:
-            semantic_docs = self.retriever.get_relevant_documents(query, k=candidate_k)
-            logger.info(f"Retrieved {len(semantic_docs)} documents from semantic search")
-        except Exception as e:
-            logger.error(f"Error in semantic search: {str(e)}")
-            semantic_docs = []
-        
-        # Get BM25 search results
-        try:
-            bm25_docs = self.bm25_search(query, k=candidate_k)
-            logger.info(f"Retrieved {len(bm25_docs)} documents from BM25 search")
-        except Exception as e:
-            logger.error(f"Error in BM25 search: {str(e)}")
-            bm25_docs = []
-        
-        # Get graph search results if available
-        graph_docs = []
-        if GRAPHRAG_AVAILABLE and self.graph_search:
-            try:
-                graph_docs = self.graph_based_search(query, k=candidate_k)
-                logger.info(f"Retrieved {len(graph_docs)} documents from graph search")
-            except Exception as e:
-                logger.error(f"Error in graph search: {str(e)}")
-        
-        # If all methods fail completely, return empty list
-        if not semantic_docs and not bm25_docs and not graph_docs:
-            logger.error("All retrieval methods failed. No documents to return.")
-            return []
-        
-        # Combine and deduplicate results
-        unique_docs = {}
-        
-        # Add all documents to unique_docs dictionary using content hash as key
-        for doc in semantic_docs + bm25_docs + graph_docs:
-            doc_id = str(hash(doc.page_content))
-            if doc_id not in unique_docs:
-                unique_docs[doc_id] = doc
-        
-        combined_docs = list(unique_docs.values())
-        logger.info(f"Combined {len(combined_docs)} unique documents for ranking")
-        
-        # Score and rank documents using the combined weighted scoring method
-        doc_scores = {}
-        
-        # Score semantic docs
-        for i, doc in enumerate(semantic_docs):
-            doc_id = str(hash(doc.page_content))
-            score = self.semantic_weight * (1.0 / (i + 1))  # Reciprocal rank
-            doc_scores[doc_id] = doc_scores.get(doc_id, 0) + score
-        
-        # Score BM25 docs
-        for i, doc in enumerate(bm25_docs):
-            doc_id = str(hash(doc.page_content))
-            score = self.bm25_weight * (1.0 / (i + 1))  # Reciprocal rank
-            doc_scores[doc_id] = doc_scores.get(doc_id, 0) + score
-        
-        # Score graph docs
-        for i, doc in enumerate(graph_docs):
-            doc_id = str(hash(doc.page_content))
-            score = self.graph_weight * (1.0 / (i + 1))  # Reciprocal rank
-            doc_scores[doc_id] = doc_scores.get(doc_id, 0) + score
-        
-        # Sort by score
-        sorted_docs = sorted(
-            combined_docs,
-            key=lambda doc: doc_scores.get(str(hash(doc.page_content)), 0),
-            reverse=True
-        )
-        
-        return sorted_docs[:k]
+    # Graph-based retrieval removed; using hybrid (semantic + BM25) only
     
     def hybrid_retrieval(self, query: str, k: int = 4) -> List[Document]:
         """
@@ -403,10 +266,12 @@ class WebAnalyzer:
         
         # Combine and deduplicate results
         unique_docs = {}
+        def _stable_id(text: str) -> str:
+            return hashlib.sha256(text.encode('utf-8', errors='ignore')).hexdigest()
         
         # Add all documents to unique_docs dictionary using content hash as key
         for doc in semantic_docs + bm25_docs:
-            doc_id = str(hash(doc.page_content))
+            doc_id = _stable_id(doc.page_content)
             if doc_id not in unique_docs:
                 unique_docs[doc_id] = doc
         
@@ -418,57 +283,45 @@ class WebAnalyzer:
         
         # Score semantic docs
         for i, doc in enumerate(semantic_docs):
-            doc_id = str(hash(doc.page_content))
+            doc_id = _stable_id(doc.page_content)
             score = self.semantic_weight * (1.0 / (i + 1))  # Reciprocal rank
             doc_scores[doc_id] = doc_scores.get(doc_id, 0) + score
         
         # Score BM25 docs
         for i, doc in enumerate(bm25_docs):
-            doc_id = str(hash(doc.page_content))
+            doc_id = _stable_id(doc.page_content)
             score = self.bm25_weight * (1.0 / (i + 1))  # Reciprocal rank
             doc_scores[doc_id] = doc_scores.get(doc_id, 0) + score
         
         # Sort by score
         sorted_docs = sorted(
             combined_docs,
-            key=lambda doc: doc_scores.get(str(hash(doc.page_content)), 0),
+            key=lambda doc: doc_scores.get(_stable_id(doc.page_content), 0),
             reverse=True
         )
         
         return sorted_docs[:k]
     
-    def process_query(self, question: str, advanced_mode: bool = False, use_graph: bool = True) -> Dict[str, Any]:
+    def process_query(self, question: str) -> Dict[str, Any]:
         """
-        Process a query against the vector store, with options for advanced multi-hop reasoning and graph search.
+        Process a query against the vector store using standard RAG (semantic + BM25 retrieval).
         
         Args:
             question: Query string
-            advanced_mode: Whether to use multi-hop reasoning
-            use_graph: Whether to use graph-based search in addition to semantic and BM25
-            
+        
         Returns:
             Dictionary with query results and analysis
         """
-        if advanced_mode:
-            logger.info(f"Processing query with DSPy multi-hop reasoning: {question}")
-            # Import here to avoid circular imports
-            from .query_analyze_prompt import WebAnalyzerPrompts
-            # Create a prompts instance and forward to its implementation
-            prompts = WebAnalyzerPrompts()
-            return prompts.process_query_advanced(question)
-        else:
-            logger.info(f"Processing query with {'enhanced' if use_graph else 'standard'} RAG: {question}")
-            # Use the process_query implementation with graph option
-            return self._process_query_standard(question, use_graph=use_graph)
+        logger.info(f"Processing query with standard RAG: {question}")
+        return self._process_query_standard(question)
     
-    def _process_query_standard(self, query: str, use_graph: bool = True) -> Dict[str, Any]:
+    def _process_query_standard(self, query: str) -> Dict[str, Any]:
         """
-        Process a query against the vector store using hybrid retrieval with optional graph search.
+        Process a query against the vector store using hybrid retrieval (semantic + BM25).
         
         Args:
             query: Query string
-            use_graph: Whether to use graph-based search
-            
+        
         Returns:
             Dictionary with query results and analysis
         """
@@ -491,27 +344,35 @@ class WebAnalyzer:
         # Create RAG chain with cached document retrieval
         def retrieve_and_cache(q):
             nonlocal cached_docs
-            if use_graph and GRAPHRAG_AVAILABLE and self.graph_search:
-                cached_docs = self.enhanced_hybrid_retrieval(q)
-                logger.info("Using enhanced hybrid retrieval with graph search")
-            else:
-                cached_docs = self.hybrid_retrieval(q)
-                logger.info("Using standard hybrid retrieval (semantic + BM25)")
+            cached_docs = self.hybrid_retrieval(q)
+            logger.info("Using hybrid retrieval (semantic + BM25)")
             return cached_docs
         
         # Cache for storing retrieved documents
         cached_docs = []
         
-        rag_chain = (
-            {"context": RunnableLambda(retrieve_and_cache) | self.format_docs, "question": RunnablePassthrough()}
-            | prompt
-            | self.llm
-            | StrOutputParser()
-        )
+        # Build chain when LLM is available; otherwise, fall back to a deterministic answer
+        if self.llm is not None:
+            rag_chain = (
+                {"context": RunnableLambda(retrieve_and_cache) | self.format_docs, "question": RunnablePassthrough()}
+                | prompt
+                | self.llm
+                | StrOutputParser()
+            )
+        else:
+            rag_chain = None
         
         # Process the query
         try:
-            result = rag_chain.invoke(query)
+            if rag_chain is not None:
+                result = rag_chain.invoke(query)
+            else:
+                # Fallback: return top passage snippets
+                if not cached_docs:
+                    result = "No relevant documents found and no LLM available."
+                else:
+                    snippet = "\n\n".join([d.page_content[:400] for d in cached_docs[:2]])
+                    result = f"LLM unavailable. Top passages:\n\n{snippet}"
             logger.info("Successfully processed query")
             
             # The documents are already in cached_docs from the chain execution
@@ -570,16 +431,27 @@ class WebAnalyzer:
         prompt = PromptTemplate.from_template(prompt_template)
         
         # Create RAG chain (original method)
-        rag_chain = (
-            {"context": self.compression_retriever | self.format_docs, "question": RunnablePassthrough()}
-            | prompt
-            | self.llm
-            | StrOutputParser()
-        )
+        if self.llm is not None:
+            rag_chain = (
+                {"context": self.compression_retriever | self.format_docs, "question": RunnablePassthrough()}
+                | prompt
+                | self.llm
+                | StrOutputParser()
+            )
+        else:
+            rag_chain = None
         
         # Process the query
         try:
-            result = rag_chain.invoke(query)
+            if rag_chain is not None:
+                result = rag_chain.invoke(query)
+            else:
+                docs = self.compression_retriever.get_relevant_documents(query)
+                if not docs:
+                    result = "No relevant documents found and no LLM available."
+                else:
+                    snippet = "\n\n".join([d.page_content[:400] for d in docs[:2]])
+                    result = f"LLM unavailable. Top passages:\n\n{snippet}"
             logger.info("Successfully processed query")
             
             # Get the relevant documents for transparency
@@ -628,16 +500,6 @@ class WebAnalyzer:
             except Exception:
                 bm25_working = False
             
-            # Check graph search if available
-            graph_working = False
-            if GRAPHRAG_AVAILABLE and self.graph_search:
-                try:
-                    graph_docs = self.graph_based_search("test cryptocurrency regulation", k=1)
-                    if graph_docs:
-                        graph_working = True
-                except Exception:
-                    pass
-            
             status = {
                 "status": "healthy",
                 "elasticsearch": "connected",
@@ -646,11 +508,6 @@ class WebAnalyzer:
                 "index": ES_INDEX_NAME,
                 "message": "WebAnalyzer is operational with hybrid retrieval"
             }
-            
-            if GRAPHRAG_AVAILABLE:
-                status["graph_search"] = "operational" if graph_working else "unavailable"
-                if graph_working:
-                    status["message"] += " and graph search"
             
             return status
             
@@ -663,13 +520,12 @@ class WebAnalyzer:
                 "message": f"Error: {str(e)}"
             }
     
-    def query(self, question: str, use_graph: bool = True) -> Dict[str, Any]:
+    def query(self, question: str) -> Dict[str, Any]:
         """
         Query wrapper for backward compatibility with the Flask application.
         
         Args:
             question: The question to answer
-            use_graph: Whether to use graph-based search
             
         Returns:
             Dictionary with answer, documents, and metadata
@@ -678,7 +534,7 @@ class WebAnalyzer:
         
         try:
             # Process the query using the hybrid approach
-            result = self.process_query(question, use_graph=use_graph)
+            result = self.process_query(question)
             
             # Format the response for the Flask app
             return {
@@ -714,9 +570,9 @@ class WebAnalyzer:
             # Create a match phrase query to search for the text within first 200 chars
             match_query = {
                 "match_phrase": {
-                    "page_content": {
-                        "query": passage_text[:200],  # Match first 200 chars
-                        "slop": 5  # Allow for minor variations in the text
+                    "text": {
+                        "query": passage_text[:200],
+                        "slop": 5
                     }
                 }
             }
@@ -734,8 +590,8 @@ class WebAnalyzer:
                 logger.info(f"Found matching document with score: {hit['_score']}")
                 
                 # Extract the content and metadata
-                content = hit["_source"]["page_content"]
-                metadata = hit["_source"].get("metadata", {})
+                content = hit["_source"].get("text", "")
+                metadata = {k: v for k, v in hit["_source"].items() if k != "text"}
                 
                 # Create a Document object
                 doc = Document(
