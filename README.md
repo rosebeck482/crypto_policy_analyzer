@@ -54,13 +54,7 @@ A tool for analyzing and querying cryptocurrency regulation and policy documents
 
 ---
 
-## 4. Simplified Design (No Graph/DSPy)
-
-- This repository intentionally removes experimental GraphRAG and DSPy multi-hop reasoning to improve reliability and footprint. The current design focuses on hybrid retrieval (semantic + BM25) and a straightforward RAG prompt.
-
----
-
-## 5. End-to-End Pipeline Summary
+## 4. End-to-End Pipeline Summary
 
 - **Data Ingestion:**
   - Load links → Convert to Markdown (using Docling) → Generate metadata → Split into chunks (Markdown and SemanticChunker) → GPT-based annotation.
@@ -74,7 +68,7 @@ A tool for analyzing and querying cryptocurrency regulation and policy documents
 
 ---
 
-## 6. Techniques
+## 5. Techniques
 
 - **Embeddings:**
   - Uses `text-embedding-3-small` or fallback deterministic `SimpleEmbeddings` when OpenAI key is absent.
@@ -88,7 +82,7 @@ A tool for analyzing and querying cryptocurrency regulation and policy documents
 
 ---
 
-## 7. Tools and Technologies
+## 6. Tools and Technologies
 
 - **Docling:**
   - Converts URLs (HTML/PDF) to Markdown.
